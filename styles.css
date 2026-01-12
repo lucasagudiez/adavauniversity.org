@@ -1134,10 +1134,31 @@ blockquote {
     .cohorts-grid {
         grid-template-columns: 1fr;
         gap: 32px;
+        max-width: 600px;
+        margin: 0 auto;
     }
     
     .cohort-card {
         max-width: 100%;
+    }
+    
+    .mentorship-grid {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .promise-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+    
+    .promise-card {
+        padding: 24px 16px;
+    }
+    
+    .testimonials-grid {
+        max-width: 900px;
+        margin: 0 auto;
     }
 }
 
@@ -1216,15 +1237,49 @@ blockquote {
     .admissions-info,
     .cohorts-grid {
         grid-template-columns: 1fr;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .promise-card,
+    .mentorship-card,
+    .instructor-card,
+    .day-card,
+    .admission-card {
+        text-align: center;
+    }
+    
+    .mentorship-card h3,
+    .mentorship-card p {
+        text-align: left;
+    }
+    
+    .day-card ul {
+        text-align: left;
     }
     
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
     }
     
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .testimonials-grid .testimonial-card.featured {
+        grid-column: span 1;
+    }
+    
     .stats-bar {
         flex-direction: column;
         gap: 24px;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .testimonial-header {
@@ -1265,6 +1320,27 @@ blockquote {
     }
 }
 
+/* Tablet Small (600px - 767px) */
+@media (max-width: 767px) and (min-width: 600px) {
+    .promise-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        max-width: 100%;
+    }
+    
+    .promise-card {
+        padding: 20px 12px;
+    }
+    
+    .promise-card h3 {
+        font-size: 1rem;
+    }
+    
+    .promise-card p {
+        font-size: 0.85rem;
+    }
+}
+
 /* Mobile Large (481px - 767px) */
 @media (max-width: 767px) and (min-width: 481px) {
     .projects-grid {
@@ -1278,6 +1354,14 @@ blockquote {
     
     .testimonials-grid .testimonial-card.featured {
         grid-column: span 1;
+    }
+}
+
+/* Mobile Medium (481px - 599px) */
+@media (max-width: 599px) and (min-width: 481px) {
+    .promise-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
     }
 }
 
