@@ -111,10 +111,10 @@
         <div class="container">
             <h2 class="cta-title">Only a few spots left. Secure yours today!</h2>
             <form class="cta-form">
-                <input type="text" placeholder="Your Full Name" class="form-input">
-                <input type="email" placeholder="Your Email Address" class="form-input">
+                <input type="text" placeholder="Your Full Name" class="form-input" required>
+                <input type="email" placeholder="Your Email Address" class="form-input" required>
                 <div class="cta-button-group">
-                    <button type="submit" class="btn btn-primary pulse-glow">Apply Now</button>
+                    <button type="submit" class="btn btn-primary pulse-glow cta-button">Apply Now</button>
                     <div class="urgency-timer">
                         <span class="timer-label">Scholarship expires in</span>
                         <span class="timer-countdown" data-countdown>29:59</span>
@@ -267,7 +267,7 @@
             <form class="cta-form">
                 <input type="text" placeholder="Your Full Name" class="form-input">
                 <input type="email" placeholder="Your Email Address" class="form-input">
-                <button type="submit" class="btn btn-primary pulse-glow">Apply Now</button>
+                <button type="submit" class="btn btn-primary pulse-glow cta-button">Apply Now</button>
             </form>
             <p class="cta-note">It only takes a few minutes to apply! No coding experience required.</p>
         </div>
@@ -429,6 +429,94 @@
         </div>
     </section>
 
+    <!-- Certificate Achievement Section -->
+    <section class="certificate-section" id="certificate">
+        <div class="container">
+            <div class="section-header">
+                <h2>Proof of Your Achievement</h2>
+                <p class="section-subtitle">Receive your certificate upon completion</p>
+            </div>
+            
+            <div class="certificate-showcase">
+                <div class="certificate-card" data-aos="zoom-in">
+                    <div class="certificate-preview">
+                        <div class="certificate-frame">
+                            <div class="cert-header">
+                                <div class="cert-logo">
+                                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M50 0L0 100H100L50 0Z" fill="url(#cert-grad-1)"/>
+                                        <path d="M50 20L10 90H90L50 20Z" fill="url(#cert-grad-2)"/>
+                                        <defs>
+                                            <linearGradient id="cert-grad-1" x1="0" y1="0" x2="100" y2="100">
+                                                <stop offset="0%" stop-color="#8B5CF6"/>
+                                                <stop offset="100%" stop-color="#C026D3"/>
+                                            </linearGradient>
+                                            <linearGradient id="cert-grad-2" x1="0" y1="0" x2="100" y2="100">
+                                                <stop offset="0%" stop-color="#C026D3"/>
+                                                <stop offset="100%" stop-color="#06B6D4"/>
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                    <span>ADAVA UNIVERSITY</span>
+                                </div>
+                                <h4>Certificate of Completion</h4>
+                            </div>
+                            <div class="cert-body">
+                                <p class="cert-text">This certifies that</p>
+                                <p class="cert-name shimmer-text">[Your Name Here]</p>
+                                <p class="cert-text">has successfully completed the</p>
+                                <p class="cert-program">Software Development Bootcamp</p>
+                                <p class="cert-text">with distinction in AI-First Development</p>
+                            </div>
+                            <div class="cert-footer">
+                                <div class="cert-signature">
+                                    <span class="sig-line"></span>
+                                    <span class="sig-label">Program Director</span>
+                                </div>
+                                <div class="cert-seal">✓</div>
+                                <div class="cert-date">
+                                    <span class="sig-line"></span>
+                                    <span class="sig-label">Completion Date</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Completion Certificate</h3>
+                    <p>Verifiable digital certificate to showcase on LinkedIn and your resume</p>
+                </div>
+                
+                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="certificate-preview badge-preview">
+                        <div class="achievement-badge">
+                            <div class="badge-outer">
+                                <div class="badge-inner">★</div>
+                            </div>
+                            <div class="badge-ribbon">
+                                <span>TOP GRADUATE</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Excellence Award</h3>
+                    <p>Top performers receive special recognition and exclusive career opportunities</p>
+                </div>
+                
+                <div class="certificate-card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="certificate-preview portfolio-preview">
+                        <div class="portfolio-showcase">
+                            <div class="portfolio-item"><div class="portfolio-icon">🛒</div><span>E-Commerce</span></div>
+                            <div class="portfolio-item"><div class="portfolio-icon">🤖</div><span>AI Chatbot</span></div>
+                            <div class="portfolio-item"><div class="portfolio-icon">📊</div><span>SaaS Dashboard</span></div>
+                            <div class="portfolio-item"><div class="portfolio-icon">📱</div><span>Mobile App</span></div>
+                            <div class="portfolio-item"><div class="portfolio-icon">🔗</div><span>API Integration</span></div>
+                        </div>
+                    </div>
+                    <h3>Portfolio of 5+ Projects</h3>
+                    <p>Graduate with production-ready applications to show employers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Curriculum Section -->
     <section class="curriculum-section" id="curriculum">
         <div class="container">
@@ -516,7 +604,7 @@
             <form class="cta-form">
                 <input type="text" placeholder="Your Full Name" class="form-input">
                 <input type="email" placeholder="Your Email Address" class="form-input">
-                <button type="submit" class="btn btn-primary pulse-glow">Apply Now</button>
+                <button type="submit" class="btn btn-primary pulse-glow cta-button">Apply Now</button>
             </form>
             <p class="cta-note">It only takes a few minutes to apply! No coding experience required.</p>
         </div>
@@ -615,7 +703,7 @@
                     <form class="cohort-form">
                         <input type="text" placeholder="Your Full Name" class="form-input">
                         <input type="email" placeholder="Your Email Address" class="form-input">
-                        <button type="submit" class="btn btn-primary pulse-glow">Apply Now</button>
+                        <button type="submit" class="btn btn-primary pulse-glow cta-button">Apply Now</button>
                     </form>
                 </div>
 
@@ -649,7 +737,7 @@
                     <form class="cohort-form">
                         <input type="text" placeholder="Your Full Name" class="form-input">
                         <input type="email" placeholder="Your Email Address" class="form-input">
-                        <button type="submit" class="btn btn-primary pulse-glow">Apply Now</button>
+                        <button type="submit" class="btn btn-primary pulse-glow cta-button">Apply Now</button>
                     </form>
                 </div>
             </div>
@@ -819,10 +907,84 @@
         </div>
     </section>
 
+    <!-- Company Logos Marquee -->
+    <section class="logos-marquee" aria-label="Companies that hired our graduates">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <span class="logo-item">Google</span>
+                <span class="logo-item">Apple</span>
+                <span class="logo-item">Meta</span>
+                <span class="logo-item">Amazon</span>
+                <span class="logo-item">Microsoft</span>
+                <span class="logo-item">Tesla</span>
+                <span class="logo-item">Netflix</span>
+                <span class="logo-item">Stripe</span>
+                <span class="logo-item">Airbnb</span>
+                <span class="logo-item">Uber</span>
+                <span class="logo-item">Anthropic</span>
+                <span class="logo-item">OpenAI</span>
+                <!-- Duplicate for seamless loop -->
+                <span class="logo-item">Google</span>
+                <span class="logo-item">Apple</span>
+                <span class="logo-item">Meta</span>
+                <span class="logo-item">Amazon</span>
+                <span class="logo-item">Microsoft</span>
+                <span class="logo-item">Tesla</span>
+                <span class="logo-item">Netflix</span>
+                <span class="logo-item">Stripe</span>
+                <span class="logo-item">Airbnb</span>
+                <span class="logo-item">Uber</span>
+                <span class="logo-item">Anthropic</span>
+                <span class="logo-item">OpenAI</span>
+            </div>
+        </div>
+        <p class="marquee-label">Our graduates work at leading companies worldwide</p>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p class="copyright">© Copyright Adava University 2025-2026</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="images/adava-icon.svg" alt="Adava" class="footer-logo-icon">
+                        <div class="footer-logo-text">
+                            <span class="footer-logo-title">ADAVA</span>
+                            <span class="footer-logo-subtitle">UNIVERSITY</span>
+                        </div>
+                    </div>
+                    <p class="footer-tagline">Transforming careers through AI-powered education</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Program</h4>
+                    <a href="#curriculum">Curriculum</a>
+                    <a href="#instructors">Instructors</a>
+                    <a href="#results">Results</a>
+                    <a href="#faq">FAQs</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <a href="#method">Our Method</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#cohorts">Cohort Dates</a>
+                    <a href="#pricing">Pricing</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <a href="mailto:hello@adava.university">hello@adava.university</a>
+                    <a href="https://twitter.com/adavauniversity" target="_blank" rel="noopener">Twitter</a>
+                    <a href="https://linkedin.com/company/adava" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://discord.gg/adava" target="_blank" rel="noopener">Discord Community</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">© Copyright Adava University 2025-2026</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Refund Policy</a>
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -1197,6 +1359,9 @@
         });
     </script>
 
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+    
     <!-- Vanilla Tilt - 3D Card Tilt Effect -->
     <script src="https://unpkg.com/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
     
@@ -1208,6 +1373,31 @@
     <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     
     <script>
+        // Initialize Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Sync Lenis with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
         // Initialize AOS
         AOS.init({
             duration: 800,
@@ -1625,6 +1815,150 @@
             }
             
             updateCountdowns();
+        })();
+
+        // ============================================
+        // FORM VALIDATION & SUBMISSION
+        // ============================================
+        (function() {
+            const forms = document.querySelectorAll('.cta-form');
+            
+            const validateEmail = (email) => {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email.toLowerCase());
+            };
+            
+            const validateName = (name) => {
+                return name.trim().length >= 2;
+            };
+            
+            const setInputState = (input, isValid) => {
+                input.classList.remove('valid', 'invalid');
+                if (input.value.trim()) {
+                    input.classList.add(isValid ? 'valid' : 'invalid');
+                }
+            };
+            
+            forms.forEach(form => {
+                const nameInput = form.querySelector('input[type="text"]');
+                const emailInput = form.querySelector('input[type="email"]');
+                const submitBtn = form.querySelector('.cta-button');
+                
+                // Real-time validation
+                if (nameInput) {
+                    nameInput.addEventListener('blur', () => {
+                        setInputState(nameInput, validateName(nameInput.value));
+                    });
+                    nameInput.addEventListener('input', () => {
+                        if (nameInput.classList.contains('invalid')) {
+                            setInputState(nameInput, validateName(nameInput.value));
+                        }
+                    });
+                }
+                
+                if (emailInput) {
+                    emailInput.addEventListener('blur', () => {
+                        setInputState(emailInput, validateEmail(emailInput.value));
+                    });
+                    emailInput.addEventListener('input', () => {
+                        if (emailInput.classList.contains('invalid')) {
+                            setInputState(emailInput, validateEmail(emailInput.value));
+                        }
+                    });
+                }
+                
+                // Form submission
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const isNameValid = nameInput ? validateName(nameInput.value) : true;
+                    const isEmailValid = emailInput ? validateEmail(emailInput.value) : true;
+                    
+                    if (nameInput) setInputState(nameInput, isNameValid);
+                    if (emailInput) setInputState(emailInput, isEmailValid);
+                    
+                    if (!isNameValid || !isEmailValid) {
+                        // Focus first invalid field
+                        if (!isNameValid && nameInput) {
+                            nameInput.focus();
+                        } else if (!isEmailValid && emailInput) {
+                            emailInput.focus();
+                        }
+                        return;
+                    }
+                    
+                    // Show loading state
+                    const originalText = submitBtn.textContent;
+                    submitBtn.classList.add('loading');
+                    submitBtn.textContent = 'Submitting';
+                    
+                    // Simulate API call (replace with actual submission)
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+                    
+                    // Show success state
+                    submitBtn.classList.remove('loading');
+                    submitBtn.classList.add('success');
+                    submitBtn.textContent = 'Application Received!';
+                    
+                    // Reset form
+                    if (nameInput) {
+                        nameInput.value = '';
+                        nameInput.classList.remove('valid');
+                    }
+                    if (emailInput) {
+                        emailInput.value = '';
+                        emailInput.classList.remove('valid');
+                    }
+                    
+                    // Reset button after delay
+                    setTimeout(() => {
+                        submitBtn.classList.remove('success');
+                        submitBtn.textContent = originalText;
+                    }, 3000);
+                });
+            });
+            
+            // Scholarship code validation
+            const scholarshipForm = document.querySelector('.scholarship-form');
+            if (scholarshipForm) {
+                const codeInput = scholarshipForm.querySelector('input');
+                const applyBtn = scholarshipForm.querySelector('button');
+                
+                scholarshipForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    if (!codeInput.value.trim()) {
+                        codeInput.classList.add('invalid');
+                        return;
+                    }
+                    
+                    applyBtn.textContent = 'Checking...';
+                    applyBtn.disabled = true;
+                    
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    // Simulate scholarship check
+                    const isValid = codeInput.value.toLowerCase() === 'adava2026' || 
+                                   codeInput.value.toLowerCase() === 'earlybird';
+                    
+                    if (isValid) {
+                        applyBtn.textContent = '✓ Applied!';
+                        applyBtn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                        codeInput.classList.remove('invalid');
+                        codeInput.classList.add('valid');
+                    } else {
+                        applyBtn.textContent = 'Invalid Code';
+                        applyBtn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
+                        codeInput.classList.add('invalid');
+                        
+                        setTimeout(() => {
+                            applyBtn.textContent = 'Use Scholarship';
+                            applyBtn.style.background = '';
+                            applyBtn.disabled = false;
+                        }, 2000);
+                    }
+                });
+            }
         })();
     </script>
 </body>
