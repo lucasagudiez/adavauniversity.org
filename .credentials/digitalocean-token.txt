@@ -1,0 +1,13 @@
+# DigitalOcean API Token
+# 
+# To get a token:
+# 1. Go to https://cloud.digitalocean.com/account/api/tokens
+# 2. Click "Generate New Token"
+# 3. Give it a name and select appropriate scopes
+# 4. Copy the token and paste it below (replace this placeholder)
+#
+# Then run: doctl auth init
+# And paste the token when prompted
+
+YOUR_DIGITALOCEAN_TOKEN_HERE
+
