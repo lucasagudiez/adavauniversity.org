@@ -44,6 +44,30 @@
     --container-max: 1100px;
 }
 
+/* ============================================
+   ANIMATED GRADIENT KEYFRAMES
+   ============================================ */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(245, 158, 11, 0.4), 0 0 40px rgba(245, 158, 11, 0.2); }
+    50% { box-shadow: 0 0 30px rgba(245, 158, 11, 0.6), 0 0 60px rgba(245, 158, 11, 0.3); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
 /* Reset */
 *, *::before, *::after {
     margin: 0;
@@ -114,8 +138,9 @@ h3 { font-size: 1.25rem; }
     right: 0;
     z-index: 1000;
     padding: 16px 0;
-    background: rgba(15, 8, 24, 0.9);
+    background: rgba(15, 8, 24, 0.85);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -198,13 +223,17 @@ h3 { font-size: 1.25rem; }
 }
 
 .btn-primary {
-    background: var(--cta-gold);
+    background: linear-gradient(90deg, var(--cta-gold), #fcd34d, var(--cta-gold));
+    background-size: 200% 100%;
     color: #000;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3), 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: gradientShift 3s ease infinite;
 }
 
 .btn-primary:hover {
     background: var(--cta-gold-hover);
     transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.5), 0 0 60px rgba(245, 158, 11, 0.3), 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .btn-secondary {
@@ -284,15 +313,17 @@ h3 { font-size: 1.25rem; }
     line-height: 1.7;
 }
 
-/* Credential Box */
+/* Credential Box - Glassmorphism */
 .credential-box {
-    background: rgba(26, 10, 46, 0.8);
-    border: 1px solid var(--border-subtle);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
     padding: 32px 40px;
     max-width: 700px;
     margin: 0 auto;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 .credential-intro {
@@ -371,17 +402,20 @@ h3 { font-size: 1.25rem; }
 }
 
 .promise-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     padding: 32px;
     text-align: center;
-    transition: all 0.3s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .promise-card:hover {
     border-color: var(--purple-light);
-    transform: translateY(-4px);
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.2), 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .promise-icon {
@@ -497,16 +531,20 @@ h3 { font-size: 1.25rem; }
 }
 
 .instructor-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     padding: 28px;
     text-align: center;
-    transition: all 0.3s;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .instructor-card:hover {
     border-color: var(--purple-light);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 0 40px rgba(139, 92, 246, 0.25), 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .instructor-avatar {

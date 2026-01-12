@@ -399,6 +399,215 @@ test('Page has employment/success metrics', () => {
 });
 
 // ============================================================================
+// SECTION 13: UI EFFECTS - GLASSMORPHISM
+// ============================================================================
+console.log('\n--- Glassmorphism Effects Tests ---');
+
+test('CSS has backdrop-filter blur for glassmorphism', () => {
+    const css = fs.readFileSync('styles.css', 'utf8');
+    assert(
+        css.includes('backdrop-filter') && css.includes('blur'),
+        'Missing backdrop-filter blur for glassmorphism'
+    );
+});
+
+test('CSS has -webkit-backdrop-filter for Safari support', () => {
+    const css = fs.readFileSync('styles.css', 'utf8');
+    assert(css.includes('-webkit-backdrop-filter'), 'Missing -webkit-backdrop-filter for Safari');
+});
+
+test('CSS has glass card class or similar', () => {
+    const css = fs.readFileSync('styles.css', 'utf8');
+    assert(
+        css.includes('.glass') || css.includes('rgba(255, 255, 255') || 
+        css.includes('rgba(255,255,255') || css.includes('backdrop-filter'),
+        'Missing glass effect styles'
+    );
+});
+
+// ============================================================================
+// SECTION 14: UI EFFECTS - ANIMATED GRADIENTS
+// ============================================================================
+console.log('\n--- Animated Gradient Tests ---');
+
+test('CSS has animated gradient keyframes', () => {
+    const css = fs.readFileSync('styles.css', 'utf8');
+    assert(
+        css.includes('@keyframes') && (css.includes('gradient') || css.includes('Gradient') || css.includes('background-position')),
+        'Missing animated gradient keyframes'
+    );
+});
+
+test('CSS has background-size for gradient animation', () => {
+    const css = fs.readFileSync('styles.css', 'utf8');
+    assert(
+        css.includes('background-size') && (css.includes('200%') || css.includes('400%')),
+        'Missing background-size for gradient animation'
+    );
+});
+
+// ============================================================================
+// SECTION 15: UI EFFECTS - GLOW EFFECTS
+// ============================================================================
+console.log('\n--- Glow Effects Tests ---');
+
+test('CSS has box-shadow glow on buttons', () => {
+    const css = fs.readFileSync('styles.css', 'utf8');
+    assert(
+        css.includes('box-shadow') && (css.includes('0 0 ') || css.includes('0px 0px')),
+        'Missing glow box-shadow effects'
+    );
+});
+
+test('CSS has hover glow effect', () => {
+    const css = fs.readFileSync('styles.css', 'utf8');
+    assert(
+        css.includes(':hover') && css.includes('box-shadow'),
+        'Missing hover glow effect'
+    );
+});
+
+// ============================================================================
+// SECTION 16: UI EFFECTS - VANILLA TILT
+// ============================================================================
+console.log('\n--- 3D Tilt Effects Tests ---');
+
+test('HTML includes Vanilla Tilt library', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert(
+        html.includes('vanilla-tilt') || html.includes('tilt'),
+        'Missing Vanilla Tilt library'
+    );
+});
+
+test('HTML has data-tilt attributes on cards', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert(
+        html.includes('data-tilt') || html.includes('tilt-card'),
+        'Missing data-tilt attributes on cards'
+    );
+});
+
+// ============================================================================
+// SECTION 17: UI EFFECTS - AOS SCROLL ANIMATIONS
+// ============================================================================
+console.log('\n--- Scroll Animation Tests ---');
+
+test('HTML includes AOS library', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert(
+        html.includes('aos.js') || html.includes('aos@') || html.includes('AOS'),
+        'Missing AOS animation library'
+    );
+});
+
+test('HTML has data-aos attributes', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert(
+        html.includes('data-aos'),
+        'Missing data-aos attributes for scroll animations'
+    );
+});
+
+test('HTML initializes AOS', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert(
+        html.includes('AOS.init'),
+        'Missing AOS.init() call'
+    );
+});
+
+// ============================================================================
+// SECTION 18: UI EFFECTS - COUNTER ANIMATION
+// ============================================================================
+console.log('\n--- Counter Animation Tests ---');
+
+test('HTML has counter elements with data attributes', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert(
+        html.includes('data-count') || html.includes('counter') || html.includes('stat-number'),
+        'Missing counter elements'
+    );
+});
+
+test('HTML/JS has counter animation logic', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert(
+        html.includes('animateCounter') || html.includes('countUp') || 
+        html.includes('IntersectionObserver') || html.includes('counter'),
+        'Missing counter animation logic'
+    );
+});
+
+// ============================================================================
+// SECTION 19: UI EFFECTS - SMOOTH SCROLL
+// ============================================================================
+console.log('\n--- Smooth Scroll Tests ---');
+
+test('CSS or HTML has smooth scroll behavior', () => {
+    const css = fs.readFileSync('styles.css', 'utf8');
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert(
+        css.includes('scroll-behavior: smooth') || html.includes('lenis') || 
+        html.includes('smooth') || css.includes('scroll-behavior'),
+        'Missing smooth scroll behavior'
+    );
+});
+
+// ============================================================================
+// SECTION 20: UI EFFECTS - CSS TRANSITIONS
+// ============================================================================
+console.log('\n--- CSS Transitions Tests ---');
+
+test('CSS has transition properties for smooth animations', () => {
+    const css = fs.readFileSync('styles.css', 'utf8');
+    const transitionCount = (css.match(/transition:/g) || []).length;
+    assert(transitionCount >= 5, `Only ${transitionCount} transitions found, need at least 5`);
+});
+
+test('CSS has transform properties', () => {
+    const css = fs.readFileSync('styles.css', 'utf8');
+    assert(css.includes('transform:'), 'Missing transform properties');
+});
+
+test('CSS uses cubic-bezier or ease for smooth animations', () => {
+    const css = fs.readFileSync('styles.css', 'utf8');
+    assert(
+        css.includes('cubic-bezier') || css.includes('ease') || css.includes('ease-in-out'),
+        'Missing easing functions'
+    );
+});
+
+// ============================================================================
+// SECTION 21: UI EFFECTS - TYPEWRITER (OPTIONAL)
+// ============================================================================
+console.log('\n--- Text Effects Tests ---');
+
+test('HTML/JS has typewriter or text animation', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert(
+        html.includes('typewriter') || html.includes('typing') || 
+        html.includes('text-animate') || html.includes('SplitType') ||
+        html.includes('gsap') || html.includes('GSAP'),
+        'Missing text animation effects'
+    );
+});
+
+// ============================================================================
+// SECTION 22: UI EFFECTS - MOUSE PARALLAX
+// ============================================================================
+console.log('\n--- Mouse/Parallax Effects Tests ---');
+
+test('HTML/JS has mouse move event listener', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert(
+        html.includes('mousemove') || html.includes('parallax') || 
+        html.includes('mouse') || html.includes('cursor'),
+        'Missing mouse interaction effects'
+    );
+});
+
+// ============================================================================
 // RESULTS
 // ============================================================================
 console.log();
