@@ -13,11 +13,11 @@
     --cyan: #06b6d4;
     
     /* School colors */
-    --mit-blue: #4a90d9;
-    --stanford-green: #2ecc71;
-    --oxford-green: #2ecc71;
-    --cambridge-pink: #e91e8c;
-    --harvard-purple: #a855f7;
+    --mit-blue: #5ba3e0;
+    --stanford-green: #34d399;
+    --oxford-green: #34d399;
+    --cambridge-pink: #f472b6;
+    --harvard-purple: #c084fc;
     
     /* CTA - Teal/Green (original Adava palette) */
     --cta-teal: #25877D;
@@ -525,11 +525,11 @@ h3 { font-size: 1.25rem; }
     font-weight: 700;
 }
 
-.company.google { color: #4285F4; }
-.company.apple { color: #A2AAAD; }
-.company.meta { color: #0668E1; }
-.company.amazon { color: #2ecc71; }
-.company.microsoft { color: #00A4EF; }
+.company.google { color: #5ba3e0; }
+.company.apple { color: #c0c5ca; }
+.company.meta { color: #5ba3e0; }
+.company.amazon { color: #34d399; }
+.company.microsoft { color: #5ba3e0; }
 
 /* CTA Section */
 .cta-section {
