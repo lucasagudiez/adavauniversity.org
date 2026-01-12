@@ -59,6 +59,25 @@ test('adava-website-reference.md exists', () => {
     assert(fs.existsSync(resolveRoot('adava-website-reference.md')), 'adava-website-reference.md is missing');
 });
 
+test('favicon.svg exists', () => {
+    assert(fs.existsSync(resolveRoot('favicon.svg')), 'favicon.svg is missing');
+});
+
+test('favicon.png exists', () => {
+    assert(fs.existsSync(resolveRoot('favicon.png')), 'favicon.png is missing');
+});
+
+test('adava-icon.svg logo exists', () => {
+    assert(fs.existsSync(resolveRoot('images/adava-icon.svg')), 'images/adava-icon.svg is missing');
+});
+
+test('instructor images directory exists with all instructors', () => {
+    const instructorsDir = resolveRoot('images/instructors');
+    assert(fs.existsSync(instructorsDir), 'images/instructors directory is missing');
+    const files = fs.readdirSync(instructorsDir);
+    assert(files.length >= 7, `Only ${files.length} instructor images, need at least 7`);
+});
+
 // ============================================================================
 // SECTION 2: HTML STRUCTURE TESTS
 // ============================================================================
@@ -87,6 +106,17 @@ test('index.html has page title', () => {
 test('index.html has lang attribute', () => {
     const html = fs.readFileSync(resolveRoot('index.html'), 'utf8');
     assert(html.includes('lang="en"'), 'Missing lang attribute for accessibility');
+});
+
+test('index.html has both SVG and PNG favicon', () => {
+    const html = fs.readFileSync(resolveRoot('index.html'), 'utf8');
+    assert(html.includes('favicon.svg'), 'Missing SVG favicon reference');
+    assert(html.includes('favicon.png'), 'Missing PNG favicon reference');
+});
+
+test('index.html has apple-touch-icon for iOS', () => {
+    const html = fs.readFileSync(resolveRoot('index.html'), 'utf8');
+    assert(html.includes('apple-touch-icon'), 'Missing apple-touch-icon for iOS devices');
 });
 
 // ============================================================================
