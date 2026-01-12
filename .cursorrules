@@ -182,7 +182,7 @@ ls -la
    ```
 
 2. **Visual verification checklist:**
-   - [ ] Colors match Adava style (purple/magenta, gold CTAs)
+   - [ ] Colors match Adava style (purple/magenta, teal CTAs #25877D)
    - [ ] Text is readable
    - [ ] Buttons are visible and styled
    - [ ] Forms are functional looking
@@ -222,6 +222,41 @@ ls -la
 
 ---
 
+## 🚀 DEPLOYMENT - CRITICAL
+
+**Deployment is via the `deploy` branch. The production server auto-pulls from this branch.**
+
+### HOW TO DEPLOY:
+```bash
+# From your worktree or main directory:
+cd /Users/lucas/cursor\ projects/ai-coding-course-deploy
+git merge origin/agent-work -m "Deploy: description of changes"
+git push origin deploy
+```
+
+### DEPLOYMENT RULES:
+1. **NEVER use GitHub Pages** - We have our own server
+2. **Only push to `deploy` branch when ready for production**
+3. **Server auto-pulls** - Changes go live automatically after push
+4. **Test locally first** before merging to deploy
+5. **All tests MUST pass** before deploying
+
+### BRANCH STRUCTURE:
+| Branch | Purpose |
+|--------|---------|
+| `main` | Stable development branch |
+| `deploy` | Production - server auto-pulls from here |
+| `agent-work` | Agent worktree branch |
+| `feature-*` | Feature branches |
+
+### FORBIDDEN:
+- ❌ GitHub Pages
+- ❌ Netlify, Vercel, or other hosting services
+- ❌ Pushing untested code to deploy branch
+- ❌ Direct commits to deploy (always merge from tested branch)
+
+---
+
 ## Browser Testing
 
 1. Use local HTTP server: `python3 -m http.server 8888`
@@ -248,8 +283,8 @@ ls -la
 ### Design Requirements (Adava Style):
 1. **Dark theme** - Dark purple/black backgrounds
 2. **Purple/Magenta accents** - Primary colors
-3. **Gold/Yellow CTAs** - For action buttons
-4. **University colors** - MIT blue, Stanford green, etc.
+3. **Teal/Green CTAs** - `#25877D` for action buttons (original Adava palette)
+4. **University colors** - MIT blue, Stanford green, Oxford teal, Cambridge pink, Harvard purple
 5. **Professional but exciting** - Clean, conversion-focused
 
 ---
