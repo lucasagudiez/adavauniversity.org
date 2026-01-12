@@ -603,6 +603,20 @@ h3 { font-size: 1.25rem; }
     margin-bottom: 40px;
 }
 
+.testimonials-grid .testimonial-card:not(.featured) {
+    display: grid;
+}
+
+@media (min-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .testimonials-grid .testimonial-card.featured {
+        grid-column: span 2;
+    }
+}
+
 .testimonial-card {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
