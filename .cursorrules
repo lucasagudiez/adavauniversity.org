@@ -1,5 +1,33 @@
 # AI Coding Course Landing Page - Cursor Rules
 
+## ⛔⛔⛔ USE GIT WORKTREES - MULTIPLE AGENTS WORKING ⛔⛔⛔
+
+**CRITICAL: Multiple AI agents may be working on this project simultaneously.**
+
+### BEFORE STARTING ANY WORK:
+1. **Create your own worktree** to avoid conflicts with other agents:
+   ```bash
+   # Create a worktree with a unique name (use your task or a timestamp)
+   git worktree add ../ai-coding-course-deploy deploy
+   # OR for a feature branch:
+   git worktree add ../ai-coding-course-feature-XYZ -b feature-XYZ
+   ```
+
+2. **Work in YOUR worktree**, not the main directory
+3. **When done**, merge your changes and remove the worktree:
+   ```bash
+   git worktree remove ../ai-coding-course-deploy
+   ```
+
+### WHY:
+- Prevents merge conflicts between agents
+- Each agent has isolated workspace
+- Main directory stays clean for other agents
+
+**VIOLATION = CONFLICTS AND BROKEN WORK FOR OTHER AGENTS**
+
+---
+
 ## ⛔⛔⛔ NEVER RUN LONG COMMANDS WITHOUT PROGRESS FEEDBACK ⛔⛔⛔
 
 **CRITICAL: Commands that process multiple items MUST print feedback IMMEDIATELY and FREQUENTLY.**
