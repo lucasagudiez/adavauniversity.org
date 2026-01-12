@@ -33,6 +33,21 @@
 
     <!-- Hero Section -->
     <header class="hero">
+        <!-- Floating parallax elements for depth -->
+        <div class="parallax-layer parallax-back">
+            <div class="float-shape shape-1"></div>
+            <div class="float-shape shape-2"></div>
+            <div class="float-shape shape-3"></div>
+        </div>
+        <div class="parallax-layer parallax-mid">
+            <div class="float-shape shape-4"></div>
+            <div class="float-shape shape-5"></div>
+        </div>
+        <div class="parallax-layer parallax-front">
+            <div class="float-shape shape-6"></div>
+            <div class="float-shape shape-7"></div>
+        </div>
+        
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">
@@ -761,67 +776,117 @@
         const credentialBox = document.querySelector('.credential-box');
         const networkBg = document.querySelector('#network-bg');
         
-        // Parallax configuration - higher = more movement
+        // Floating parallax layers
+        const parallaxBack = document.querySelector('.parallax-back');
+        const parallaxMid = document.querySelector('.parallax-mid');
+        const parallaxFront = document.querySelector('.parallax-front');
+        
+        // AGGRESSIVE parallax configuration - VERY noticeable depth layers
+        // Each layer moves at different speeds creating obvious depth
         const parallaxConfig = {
-            title: { x: 25, y: 15 },        // Foreground - moves most
-            subtitle: { x: 15, y: 10 },     // Mid layer
-            credential: { x: 40, y: 25 },   // Main floating element
-            background: { x: -10, y: -5 }   // Background - moves opposite, less
+            // Floating background elements - move OPPOSITE to cursor (far away)
+            back: { x: -20, y: -15 },
+            mid: { x: -40, y: -30 },
+            front: { x: -60, y: -45 },
+            // Text layers - move WITH cursor (close to viewer)
+            title: { x: 50, y: 35 },
+            subtitle: { x: 30, y: 20 },
+            credential: { x: 70, y: 45 }
         };
         
         if (hero) {
-            // Add transition for smooth parallax
-            [heroTitle, heroSubtitle, credentialBox].forEach(el => {
-                if (el) el.style.transition = 'transform 0.15s ease-out, box-shadow 0.15s ease-out';
+            // Style each layer with transitions
+            [parallaxBack, parallaxMid, parallaxFront].forEach(layer => {
+                if (layer) {
+                    layer.style.transition = 'transform 0.25s ease-out';
+                }
             });
+            if (heroTitle) {
+                heroTitle.style.transition = 'transform 0.08s ease-out';
+                heroTitle.style.transformStyle = 'preserve-3d';
+            }
+            if (heroSubtitle) {
+                heroSubtitle.style.transition = 'transform 0.1s ease-out';
+                heroSubtitle.style.transformStyle = 'preserve-3d';
+            }
+            if (credentialBox) {
+                credentialBox.style.transition = 'transform 0.12s ease-out, box-shadow 0.15s ease-out';
+                credentialBox.style.transformStyle = 'preserve-3d';
+            }
+            if (networkBg) {
+                networkBg.style.transition = 'transform 0.3s ease-out';
+            }
             
             hero.addEventListener('mousemove', (e) => {
                 const rect = hero.getBoundingClientRect();
-                const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
-                const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+                // Normalized position: -1 to 1 from center
+                const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+                const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
                 
-                // Layer 1: Hero title - foreground parallax
+                // FLOATING LAYERS - move opposite to cursor for depth effect
+                if (parallaxBack) {
+                    parallaxBack.style.transform = `translate(${x * parallaxConfig.back.x}px, ${y * parallaxConfig.back.y}px)`;
+                }
+                if (parallaxMid) {
+                    parallaxMid.style.transform = `translate(${x * parallaxConfig.mid.x}px, ${y * parallaxConfig.mid.y}px)`;
+                }
+                if (parallaxFront) {
+                    parallaxFront.style.transform = `translate(${x * parallaxConfig.front.x}px, ${y * parallaxConfig.front.y}px)`;
+                }
+                
+                // TEXT LAYERS - move WITH cursor (they're in front)
                 if (heroTitle) {
-                    heroTitle.style.transform = `translate(${x * parallaxConfig.title.x}px, ${y * parallaxConfig.title.y}px)`;
+                    const tx = x * parallaxConfig.title.x;
+                    const ty = y * parallaxConfig.title.y;
+                    heroTitle.style.transform = `translate(${tx}px, ${ty}px) scale(1.02)`;
                 }
                 
-                // Layer 2: Subtitle - mid-layer parallax
                 if (heroSubtitle) {
-                    heroSubtitle.style.transform = `translate(${x * parallaxConfig.subtitle.x}px, ${y * parallaxConfig.subtitle.y}px)`;
+                    const tx = x * parallaxConfig.subtitle.x;
+                    const ty = y * parallaxConfig.subtitle.y;
+                    heroSubtitle.style.transform = `translate(${tx}px, ${ty}px)`;
                 }
                 
-                // Layer 3: Credential box - main floating element with 3D shadow
+                // Credential box - FLOATING element with dramatic 3D tilt + shadow
                 if (credentialBox) {
-                    const moveX = x * parallaxConfig.credential.x;
-                    const moveY = y * parallaxConfig.credential.y;
+                    const tx = x * parallaxConfig.credential.x;
+                    const ty = y * parallaxConfig.credential.y;
+                    const rotateX = -y * 8; // Tilt toward cursor
+                    const rotateY = x * 8;
                     
-                    // Shadow moves OPPOSITE to create floating 3D effect
-                    const shadowX = -x * 30;
-                    const shadowY = -y * 20 + 15; // Base offset + dynamic
-                    const shadowBlur = 40 + Math.abs(x * 20) + Math.abs(y * 15);
+                    // Dynamic shadow - moves OPPOSITE for 3D floating effect
+                    const shadowX = -x * 40;
+                    const shadowY = -y * 30 + 20;
+                    const shadowBlur = 50 + Math.abs(x * 25) + Math.abs(y * 20);
                     
-                    credentialBox.style.transform = `translate(${moveX}px, ${moveY}px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg)`;
+                    credentialBox.style.transform = `translate(${tx}px, ${ty}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
                     credentialBox.style.boxShadow = `
-                        ${shadowX}px ${shadowY}px ${shadowBlur}px rgba(0, 0, 0, 0.4),
-                        0 0 60px rgba(139, 92, 246, 0.15),
-                        inset 0 0 0 1px rgba(255, 255, 255, 0.1)
+                        ${shadowX}px ${shadowY}px ${shadowBlur}px rgba(0, 0, 0, 0.5),
+                        0 0 60px rgba(139, 92, 246, 0.2),
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.12)
                     `;
                 }
                 
-                // Layer 4: Background - subtle opposite movement for depth
+                // Network background - moves opposite (far layer)
                 if (networkBg) {
-                    networkBg.style.transform = `translate(${x * parallaxConfig.background.x}px, ${y * parallaxConfig.background.y}px)`;
+                    networkBg.style.transform = `translate(${x * -25}px, ${y * -18}px) scale(1.1)`;
                 }
             });
             
             hero.addEventListener('mouseleave', () => {
-                if (heroTitle) heroTitle.style.transform = 'translate(0, 0)';
+                // Reset floating layers
+                if (parallaxBack) parallaxBack.style.transform = 'translate(0, 0)';
+                if (parallaxMid) parallaxMid.style.transform = 'translate(0, 0)';
+                if (parallaxFront) parallaxFront.style.transform = 'translate(0, 0)';
+                
+                // Reset text layers
+                if (heroTitle) heroTitle.style.transform = 'translate(0, 0) scale(1)';
                 if (heroSubtitle) heroSubtitle.style.transform = 'translate(0, 0)';
                 if (credentialBox) {
-                    credentialBox.style.transform = 'translate(0, 0) rotateX(0) rotateY(0)';
-                    credentialBox.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.05)';
+                    credentialBox.style.transform = 'translate(0, 0) rotateX(0) rotateY(0) scale(1)';
+                    credentialBox.style.boxShadow = '0 15px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(139, 92, 246, 0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.1)';
                 }
-                if (networkBg) networkBg.style.transform = 'translate(0, 0)';
+                if (networkBg) networkBg.style.transform = 'translate(0, 0) scale(1.1)';
             });
         }
 

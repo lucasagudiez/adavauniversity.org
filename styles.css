@@ -278,8 +278,116 @@ h3 { font-size: 1.25rem; }
     text-align: center;
     padding: 120px 24px 80px;
     position: relative;
-    perspective: 1000px;
+    perspective: 1500px;
+    perspective-origin: 50% 40%;
     overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+/* Floating Parallax Layers */
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    will-change: transform;
+    transition: transform 0.15s ease-out;
+}
+
+.parallax-back { z-index: 1; }
+.parallax-mid { z-index: 2; }
+.parallax-front { z-index: 3; }
+.hero-container { z-index: 10; position: relative; }
+
+/* Floating Shapes */
+.float-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.15;
+    filter: blur(1px);
+}
+
+.shape-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--purple-light) 0%, transparent 70%);
+    top: -100px;
+    left: -100px;
+    animation: float-slow 20s ease-in-out infinite;
+}
+
+.shape-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--magenta) 0%, transparent 70%);
+    top: 60%;
+    right: -50px;
+    animation: float-slow 25s ease-in-out infinite reverse;
+}
+
+.shape-3 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, var(--cta-gold) 0%, transparent 70%);
+    bottom: 10%;
+    left: 20%;
+    animation: float-slow 18s ease-in-out infinite;
+}
+
+.shape-4 {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.5) 0%, transparent 70%);
+    top: 30%;
+    left: 10%;
+    animation: float-medium 12s ease-in-out infinite;
+}
+
+.shape-5 {
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle, rgba(219, 39, 119, 0.4) 0%, transparent 70%);
+    top: 20%;
+    right: 15%;
+    animation: float-medium 15s ease-in-out infinite reverse;
+}
+
+.shape-6 {
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.6) 0%, transparent 70%);
+    top: 40%;
+    left: 25%;
+    animation: float-fast 8s ease-in-out infinite;
+}
+
+.shape-7 {
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.7) 0%, transparent 70%);
+    bottom: 30%;
+    right: 30%;
+    animation: float-fast 10s ease-in-out infinite reverse;
+}
+
+@keyframes float-slow {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(30px, -20px) scale(1.05); }
+    50% { transform: translate(-20px, 30px) scale(0.95); }
+    75% { transform: translate(-30px, -10px) scale(1.02); }
+}
+
+@keyframes float-medium {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(40px, -30px); }
+    66% { transform: translate(-30px, 40px); }
+}
+
+@keyframes float-fast {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(50px, -40px); }
 }
 
 .hero::before {
@@ -302,6 +410,9 @@ h3 { font-size: 1.25rem; }
     margin-bottom: 24px;
     will-change: transform;
     transform-style: preserve-3d;
+    transform: translateZ(0);
+    position: relative;
+    z-index: 10;
 }
 
 .highlight {
@@ -316,20 +427,29 @@ h3 { font-size: 1.25rem; }
     margin-bottom: 40px;
     line-height: 1.7;
     will-change: transform;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+    position: relative;
+    z-index: 8;
 }
 
 /* Credential Box - Glassmorphism with 3D Depth */
 .credential-box {
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
     padding: 32px 40px;
     max-width: 700px;
     margin: 0 auto;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    will-change: transform, box-shadow;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+    position: relative;
+    z-index: 20;
     box-shadow: 
-        0 15px 40px rgba(0, 0, 0, 0.4),
+        0 20px 60px rgba(0, 0, 0, 0.5),
         0 0 60px rgba(139, 92, 246, 0.1),
         inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     transform-style: preserve-3d;
