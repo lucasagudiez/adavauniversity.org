@@ -98,3 +98,4 @@ echo "  - prepare-commit-msg: Adds test results to commit messages"
 echo ""
 echo "To test, try: git commit --allow-empty -m 'Test hooks'"
 
+

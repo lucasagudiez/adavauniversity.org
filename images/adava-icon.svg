@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 45" fill="none">
-  <path d="M25 0 L0 45 L30 45 Z" fill="#4a2c4a"/>
-  <path d="M22 10 L12 40 L50 40 Z" fill="#7c5caa"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 44" fill="none">
+  <!-- Dark maroon/burgundy triangle (back, taller, left-positioned) -->
+  <path d="M16 0 L0 44 L32 44 Z" fill="#3b1e36"/>
+  <!-- Purple/violet triangle (front, shorter, right-positioned, overlapping) -->
+  <path d="M24 8 L10 44 L50 44 Z" fill="#5d4e8c"/>
 </svg>
