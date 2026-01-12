@@ -19,6 +19,9 @@
     --cambridge-pink: #e91e8c;
     --harvard-purple: #a855f7;
     
+    /* CTA - Gold/Yellow (Adava style) */
+    --cta-gold: #f59e0b;
+    --cta-gold-hover: #fbbf24;
     /* CTA - Teal/Green (original Adava palette) */
     --cta-teal: #25877D;
     --cta-teal-hover: #2a9a8e;
@@ -170,6 +173,12 @@ h3 { font-size: 1.25rem; }
     justify-content: center;
     font-weight: 800;
     font-size: 1.25rem;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    object-fit: contain;
 }
 
 .logo-text {
@@ -1201,6 +1210,33 @@ blockquote {
 }
 
 /* Footer */
+/* AdaVa University Branding Section */
+.adava-branding-section {
+    padding: 80px 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.adava-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--text-white);
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--purple-light) 0%, var(--magenta) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.adava-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+}
+
 .footer {
     padding: 40px 0;
     border-top: 1px solid var(--border-subtle);
