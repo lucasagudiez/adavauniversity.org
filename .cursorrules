@@ -222,6 +222,43 @@ ls -la
 
 ---
 
+## ⛔ DEPLOYMENT - ALWAYS PUSH BOTH BRANCHES ⛔
+
+**After committing, ALWAYS push both `main` AND `deploy` branches.**
+
+### Deployment Workflow:
+```bash
+# 1. Commit your changes (tests run automatically)
+git add -A && git commit -m "Your message"
+
+# 2. Push main branch
+git push origin main
+
+# 3. Merge main to deploy (use the deploy worktree)
+cd ../ai-coding-course-deploy
+git pull origin deploy
+git merge origin/main -m "Merge main"
+git push origin deploy
+
+# 4. Back to main worktree
+cd ../ai-coding-course
+```
+
+### Auto-Deploy on Server:
+- Server pulls from `deploy` branch every 10 seconds
+- Tests run automatically
+- Reverts if tests fail
+- Logs: `/home/lucas/logs/adavauniversity-deploy.log`
+
+### Private Files (blocked by nginx):
+- `.private/` - test-runner.js, *.md docs
+- `.credentials/` - API keys
+- `.git/` - Git internals
+
+**NEVER push only one branch. ALWAYS push both.**
+
+---
+
 ## Browser Testing
 
 1. Use local HTTP server: `python3 -m http.server 8888`
