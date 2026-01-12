@@ -78,10 +78,10 @@ ls -la
 ```
 
 ### 2. Read ALL relevant .md files
-- `README.md` - Project overview
-- `adava-website-reference.md` - Original site reference/copy
-- `UI-EFFECTS-RESEARCH.md` - UI effects to implement
-- Any other `.md` files in the repo
+- `README.md` - Project overview (if exists)
+- `docs/adava-website-reference.md` - Original site reference/copy
+- `docs/UI-EFFECTS-RESEARCH.md` - UI effects to implement
+- Any other `.md` files in `docs/`
 
 ### 3. Check existing code patterns
 - Look at how similar sections are implemented in `index.html`
@@ -105,7 +105,7 @@ ls -la
 
 1. **Run tests:**
    ```bash
-   node test-runner.js
+   cd scripts && node test-runner.js
    ```
 
 2. **If tests fail:**
@@ -267,9 +267,10 @@ git merge origin/deploy -m "Sync deploy"
 - Reverts if tests fail
 - Logs: `/home/lucas/logs/adavauniversity-deploy.log`
 
-### Private Files (blocked by nginx):
-- `.private/` - test-runner.js, *.md docs
-- `.credentials/` - API keys
+### Blocked Directories (nginx returns 404):
+- `scripts/` - test-runner.js, setup scripts
+- `docs/` - UI-EFFECTS-RESEARCH.md, reference docs
+- `.credentials/` - API keys (dotted = truly secret)
 - `.git/` - Git internals
 
 **NEVER push only one branch. ALWAYS push both.**
