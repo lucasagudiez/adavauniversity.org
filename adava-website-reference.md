@@ -5,10 +5,16 @@
 
 ---
 
-## SOURCE WEBSITES
+## SOURCE & TARGET WEBSITES
 
-- **AI Fluency Bootcamp:** https://aifluency.com  
+### Reference/Source (Copy Design From)
+- **AI Fluency Bootcamp:** https://aifluency.com (PRIMARY REFERENCE)
 - **Software Dev Bootcamp:** https://softwaredev.adavauniversity.org
+
+### Deployment Target
+- **New Website Will Be At:** https://adavauniversity.org
+- **Course Name:** AI Coding Mastery (or similar)
+- **Brand:** Adava University
 
 ---
 
