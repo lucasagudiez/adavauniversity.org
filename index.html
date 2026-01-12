@@ -737,41 +737,108 @@
         }
 
         // ============================================
-        // MOUSE PARALLAX - Hero Section
+        // ENHANCED MOUSE PARALLAX - Multi-layer 3D Effect
         // ============================================
         const hero = document.querySelector('.hero');
+        const heroTitle = document.querySelector('.hero-title');
+        const heroSubtitle = document.querySelector('.hero-subtitle');
         const credentialBox = document.querySelector('.credential-box');
+        const networkBg = document.querySelector('#network-bg');
         
-        if (hero && credentialBox) {
+        // Parallax configuration - higher = more movement
+        const parallaxConfig = {
+            title: { x: 25, y: 15 },        // Foreground - moves most
+            subtitle: { x: 15, y: 10 },     // Mid layer
+            credential: { x: 40, y: 25 },   // Main floating element
+            background: { x: -10, y: -5 }   // Background - moves opposite, less
+        };
+        
+        if (hero) {
+            // Add transition for smooth parallax
+            [heroTitle, heroSubtitle, credentialBox].forEach(el => {
+                if (el) el.style.transition = 'transform 0.15s ease-out, box-shadow 0.15s ease-out';
+            });
+            
             hero.addEventListener('mousemove', (e) => {
                 const rect = hero.getBoundingClientRect();
                 const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
                 const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
                 
-                // Subtle parallax on credential box
-                credentialBox.style.transform = `translate(${x * 10}px, ${y * 10}px)`;
+                // Layer 1: Hero title - foreground parallax
+                if (heroTitle) {
+                    heroTitle.style.transform = `translate(${x * parallaxConfig.title.x}px, ${y * parallaxConfig.title.y}px)`;
+                }
+                
+                // Layer 2: Subtitle - mid-layer parallax
+                if (heroSubtitle) {
+                    heroSubtitle.style.transform = `translate(${x * parallaxConfig.subtitle.x}px, ${y * parallaxConfig.subtitle.y}px)`;
+                }
+                
+                // Layer 3: Credential box - main floating element with 3D shadow
+                if (credentialBox) {
+                    const moveX = x * parallaxConfig.credential.x;
+                    const moveY = y * parallaxConfig.credential.y;
+                    
+                    // Shadow moves OPPOSITE to create floating 3D effect
+                    const shadowX = -x * 30;
+                    const shadowY = -y * 20 + 15; // Base offset + dynamic
+                    const shadowBlur = 40 + Math.abs(x * 20) + Math.abs(y * 15);
+                    
+                    credentialBox.style.transform = `translate(${moveX}px, ${moveY}px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg)`;
+                    credentialBox.style.boxShadow = `
+                        ${shadowX}px ${shadowY}px ${shadowBlur}px rgba(0, 0, 0, 0.4),
+                        0 0 60px rgba(139, 92, 246, 0.15),
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.1)
+                    `;
+                }
+                
+                // Layer 4: Background - subtle opposite movement for depth
+                if (networkBg) {
+                    networkBg.style.transform = `translate(${x * parallaxConfig.background.x}px, ${y * parallaxConfig.background.y}px)`;
+                }
             });
             
             hero.addEventListener('mouseleave', () => {
-                credentialBox.style.transform = 'translate(0, 0)';
+                if (heroTitle) heroTitle.style.transform = 'translate(0, 0)';
+                if (heroSubtitle) heroSubtitle.style.transform = 'translate(0, 0)';
+                if (credentialBox) {
+                    credentialBox.style.transform = 'translate(0, 0) rotateX(0) rotateY(0)';
+                    credentialBox.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.05)';
+                }
+                if (networkBg) networkBg.style.transform = 'translate(0, 0)';
             });
         }
 
-        // Mouse parallax on all tilt cards for extra depth
+        // Enhanced parallax on all cards with 3D shadow effect
         document.querySelectorAll('[data-tilt]').forEach(card => {
+            // Enable CSS for 3D transforms
+            card.style.transformStyle = 'preserve-3d';
+            card.style.transition = 'transform 0.1s ease-out, box-shadow 0.2s ease-out';
+            
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
                 const x = (e.clientX - rect.left) / rect.width - 0.5;
                 const y = (e.clientY - rect.top) / rect.height - 0.5;
                 
-                // Add inner glow effect based on cursor position
+                // Dynamic 3D shadow - opposite direction for floating effect
+                const shadowX = -x * 25;
+                const shadowY = -y * 20 + 10;
+                const shadowBlur = 30 + Math.abs(x * 15) + Math.abs(y * 10);
+                
+                // Inner glow follows cursor
                 const glowX = (x + 0.5) * 100;
                 const glowY = (y + 0.5) * 100;
-                card.style.background = `radial-gradient(circle at ${glowX}% ${glowY}%, rgba(139, 92, 246, 0.15), rgba(255, 255, 255, 0.03))`;
+                
+                card.style.background = `radial-gradient(circle at ${glowX}% ${glowY}%, rgba(139, 92, 246, 0.2), rgba(255, 255, 255, 0.03))`;
+                card.style.boxShadow = `
+                    ${shadowX}px ${shadowY}px ${shadowBlur}px rgba(0, 0, 0, 0.35),
+                    0 0 30px rgba(139, 92, 246, 0.1)
+                `;
             });
             
             card.addEventListener('mouseleave', () => {
                 card.style.background = 'rgba(255, 255, 255, 0.03)';
+                card.style.boxShadow = '';
             });
         });
     </script>
