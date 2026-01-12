@@ -51,7 +51,7 @@ test('test-runner.js exists', () => {
 });
 
 test('adava-website-reference.md exists', () => {
-    assert(fs.existsSync('adava-website-reference.md'), 'adava-website-reference.md is missing');
+    assert(fs.existsSync('../adava-website-reference.md'), 'adava-website-reference.md is missing');
 });
 
 // ============================================================================
