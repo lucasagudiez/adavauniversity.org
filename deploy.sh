@@ -4,8 +4,8 @@
 
 set -e
 
-MAIN_DIR="/Users/lucas/cursor projects/ai-coding-course"
-DEPLOY_WORKTREE="/Users/lucas/cursor projects/ai-coding-course-deploy"
+MAIN_DIR="/Users/lucas/cursor projects/adavauniversity.org"
+DEPLOY_WORKTREE="/Users/lucas/cursor projects/adavauniversity.org-deploy"
 
 echo "🚀 Preparing deployment..."
 echo ""
