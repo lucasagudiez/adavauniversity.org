@@ -3,11 +3,13 @@ const { defineConfig, devices } = require('@playwright/test');
 const os = require('os');
 
 /**
- * Playwright Configuration for AdaVa University Landing Page
+ * HYPER-FAST Playwright Configuration for Adava University
+ * Target: All tests in <10 seconds
  * 
  * Optimizations:
  * - Max parallelism (all CPU cores)
- * - Minimal timeouts for fast feedback
+ * - Minimal timeouts
+ * - No artifacts collection locally
  * - Chromium only by default
  * - Headless mode
  */
@@ -18,16 +20,16 @@ const cpuCount = os.cpus().length;
 module.exports = defineConfig({
     testDir: './tests',
     
-    /* Run serially for stability */
-    fullyParallel: false,
-    workers: 1,
+    /* HYPER PARALLEL - use all CPU cores */
+    fullyParallel: true,
+    workers: isCI ? 4 : cpuCount, // All cores locally
     
     forbidOnly: isCI,
-    retries: 0,
-    maxFailures: 0,
+    retries: 0, // No retries for speed
+    maxFailures: 0, // Run all tests even if some fail
     
-    /* Timeouts */
-    timeout: 30000, // 30s per test max (page has many libraries)
+    /* Fast but realistic timeouts */
+    timeout: 30000, // 30s per test max (libraries need time to load)
     expect: {
         timeout: 5000, // 5s for assertions
     },
@@ -38,27 +40,30 @@ module.exports = defineConfig({
     use: {
         baseURL: 'http://localhost:8888',
         
-        /* Timeouts - allow for library loading */
-        actionTimeout: 10000,
-        navigationTimeout: 30000,
+        /* Fast timeouts */
+        actionTimeout: 10000, // 10s for actions (AOS/GSAP need time)
+        navigationTimeout: 30000, // 30s for page loads (many CDN libraries)
         
-        /* Minimal artifacts */
+        /* Minimal artifacts - screenshots on failure for debugging */
         trace: 'off',
         screenshot: 'only-on-failure',
         video: 'off',
         
-        /* Headless */
+        /* Headless with GPU acceleration (faster rendering) */
         headless: true,
         
-        /* Disable animations */
+        /* Disable animations via CSS prefers-reduced-motion */
         reducedMotion: 'reduce',
         
         launchOptions: {
-            args: ['--disable-extensions'],
+            args: [
+                '--disable-extensions',  // Skip loading extensions
+                '--disable-dev-shm-usage', // Prevent memory issues
+            ],
         },
     },
 
-    /* Single browser - Chromium only */
+    /* Single browser - Chromium only by default */
     projects: [
         {
             name: 'chromium',
@@ -70,9 +75,9 @@ module.exports = defineConfig({
         },
     ],
 
-    /* Web server */
+    /* Fast server - npx http-server is 10x faster than Python */
     webServer: {
-        command: 'npx http-server . -p 8888 -c-1',
+        command: 'npx http-server . -p 8888 -c-1 --silent',
         url: 'http://localhost:8888',
         reuseExistingServer: true,
         timeout: 30000,  // 30s for server startup

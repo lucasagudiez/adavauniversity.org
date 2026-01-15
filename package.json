@@ -1,7 +1,7 @@
 {
   "name": "adavauniversity.org",
   "version": "1.0.0",
-  "description": "AdaVa University AI Coding Course - Learn to code with AI in 10 days",
+  "description": "Adava University AI Coding Course - Learn to code with AI in 10 days",
   "main": "index.html",
   "directories": {
     "test": "tests"
@@ -11,13 +11,19 @@
     "test:fast": "node scripts/test-runner.js",
     "test:ux": "npx playwright test --project=chromium",
     "test:ux:smoke": "npx playwright test --project=chromium --grep @smoke",
+    "test:ux:mobile": "npx playwright test --project='Mobile Chrome'",
     "test:ux:all": "npx playwright test",
     "test:ux:ui": "npx playwright test --ui",
     "test:ux:headed": "npx playwright test --headed --project=chromium",
     "test:full": "npm run test && npm run test:ux",
     "test:ci": "npm run test && npm run test:ux:smoke",
+    "test:responsive": "npx playwright test --project=chromium --project='Mobile Chrome'",
+    "test:viewport-matrix": "npx playwright test tests/viewport-matrix.spec.js --project=chromium",
     "serve": "python3 -m http.server 8888",
-    "deploy": "./deploy.sh"
+    "serve:alt": "npx http-server . -p 8888 -c-1",
+    "deploy": "./deploy.sh",
+    "precommit": "npm run test",
+    "check": "npm run test && npm run test:ux:smoke"
   },
   "keywords": [
     "ai",
@@ -25,7 +31,7 @@
     "education",
     "course"
   ],
-  "author": "AdaVa University",
+  "author": "Adava University",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {

@@ -1,23 +1,58 @@
-# AI Coding Course Landing Page - Cursor Rules
+# Adava University Landing Page - Cursor Rules
 
-## ⛔⛔⛔ USE GIT WORKTREES - MULTIPLE AGENTS WORKING ⛔⛔⛔
+## ⛔⛔⛔ ALL IMPLEMENTATION WORK MUST BE IN A WORKTREE ⛔⛔⛔
 
-**CRITICAL: Multiple AI agents may be working on this project simultaneously.**
+**NEVER make code changes directly in `adavauniversity.org/`. ALWAYS create a worktree first.**
 
-### BEFORE STARTING ANY WORK:
-1. **Create your own worktree** to avoid conflicts with other agents:
-   ```bash
-   # Create a worktree with a unique name (use your task or a timestamp)
-   git worktree add ../ai-coding-course-deploy deploy
-   # OR for a feature branch:
-   git worktree add ../ai-coding-course-feature-XYZ -b feature-XYZ
-   ```
+### MANDATORY WORKFLOW FOR ANY TASK:
+```bash
+# 1. Create a worktree for your task
+cd "/Users/lucas/cursor projects/adavauniversity.org"
+git worktree add "../adavauniversity-<task-name>" -b "feature/<task-name>"
 
-2. **Work in YOUR worktree**, not the main directory
-3. **When done**, merge your changes and remove the worktree:
-   ```bash
-   git worktree remove ../ai-coding-course-deploy
-   ```
+# 2. Work in the worktree
+cd "../adavauniversity-<task-name>"
+# ... make all your changes here ...
+
+# 3. When done, merge back to main
+cd "/Users/lucas/cursor projects/adavauniversity.org"
+git merge "feature/<task-name>" -m "Merge: <description>"
+git push origin main
+
+# 4. Update deploy and push
+cd "../adavauniversity.org-deploy"
+git merge main -m "Deploy: <description>"
+git push origin deploy
+
+# 5. Cleanup worktree
+cd "/Users/lucas/cursor projects/adavauniversity.org"
+git worktree remove "../adavauniversity-<task-name>"
+git branch -d "feature/<task-name>"
+```
+
+### THIS IS FORBIDDEN:
+- ❌ Making ANY code changes in `adavauniversity.org/` directory
+- ❌ Committing directly to `main` branch
+- ❌ Working without a worktree
+- ❌ Leaving worktrees unmerged for too long
+
+### EXISTING WORKTREES:
+```bash
+git worktree list  # See all worktrees
+```
+
+| Worktree | Branch | Purpose |
+|----------|--------|---------|
+| `adavauniversity.org/` | main | Main development |
+| `adavauniversity.org-deploy/` | deploy | Production deploys |
+
+### WHY:
+- Multiple AI agents may work on this repo simultaneously
+- Worktrees prevent merge conflicts and lost work
+- Keeps `main` and `deploy` branches clean and stable
+- Enables parallel development without conflicts
+
+**VIOLATION = MERGE CONFLICTS, LOST WORK, BROKEN DEPLOYMENTS. NO EXCEPTIONS.**
 
 ### WHY:
 - Prevents merge conflicts between agents
@@ -97,26 +132,49 @@ ls -la
 
 ---
 
-## ⛔⛔⛔ ALWAYS RUN TESTS BEFORE COMMITTING ⛔⛔⛔
+## ⛔⛔⛔ ALWAYS ADD TESTS FOR NEW FEATURES & BUG FIXES ⛔⛔⛔
 
-**EVERY commit MUST pass all tests. NO EXCEPTIONS.**
+**EVERY new feature or bug fix MUST have accompanying tests. NO EXCEPTIONS.**
 
 ### MANDATORY CHECKLIST BEFORE COMMITTING:
 
-1. **Run tests:**
-   ```bash
-   cd scripts && node test-runner.js
-   ```
+1. **For NEW FEATURES:**
+   - [ ] Add unit tests to `scripts/test-runner.js` for the new functionality
+   - [ ] Run `npm test` to verify all tests pass
+   - [ ] For UI features, add/update UX tests in `tests/ux.spec.js`
 
-2. **If tests fail:**
-   - Fix the issue
-   - Run tests again
-   - DO NOT commit until all tests pass
+2. **For BUG FIXES:**
+   - [ ] Add regression test that would have caught the bug
+   - [ ] Document the bug and fix in commit message
+   - [ ] Run `npm test` to verify fix doesn't break other things
 
-3. **Git pre-commit hook will:**
-   - Automatically run tests
-   - Block commit if tests fail
-   - Add test results to commit message
+3. **For UI/UX CHANGES:**
+   - [ ] Add/update UX tests in `tests/ux.spec.js`
+   - [ ] Run UX smoke tests: `npm run test:ux:smoke`
+   - [ ] Visual verification via screenshot
+
+### Testing Requirements - CRITICAL and AUTOMATIC
+
+#### ⚠️ UX TESTING AFTER UI CHANGES - MANDATORY ⚠️
+
+**After ANY UI/UX/CSS change, you MUST run UX tests:**
+
+```bash
+# Quick validation (after small UI tweaks):
+npm run test:ux:smoke
+
+# Thorough testing (after significant UI changes):
+npm run test:ux
+```
+
+### Test Tiers (by speed and importance)
+
+| Tier | Command | Time | When |
+|------|---------|------|------|
+| **Unit** | `npm test` | **~1s** | Every commit (automatic) |
+| **Smoke** | `npm run test:ux:smoke` | **~5s** | After UI changes, before PRs |
+| **Full UX** | `npm run test:ux` | **~20s** | After significant UI changes |
+| **All Tests** | `npm run test:full` | **~25s** | Before release |
 
 ### WHAT TESTS COVER:
 | Area | Tests |
@@ -131,6 +189,7 @@ ls -la
 | CSS | Variables, responsive, layout |
 | Design consistency | Adava style colors |
 | Accessibility | Semantic HTML, form labels |
+| UI Effects | Glassmorphism, animations, tilt |
 
 ### Rules
 1. **Run tests before every commit** - Automated via pre-commit hook
@@ -139,6 +198,20 @@ ls -la
 4. **Test results are automatically added to commit messages**
 
 **ADD THE TEST IMMEDIATELY. NOT "LATER". NOW.**
+
+---
+
+## 📖 CURSOR RULES FILES
+
+**Additional detailed rules are in `.cursor/rules/`:**
+
+| File | Purpose |
+|------|---------|
+| `testing.mdc` | Which tests to run for which file changes |
+| `ui-development.mdc` | Rules for responsive UI development |
+| `self-verification.mdc` | How to verify changes before committing |
+
+**Read these files when doing related work.**
 
 ---
 

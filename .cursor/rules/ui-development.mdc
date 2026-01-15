@@ -1,0 +1,208 @@
+# UI Development Rules for AI Agents
+
+**CRITICAL**: These rules must be followed for EVERY UI change to prevent bugs.
+
+---
+
+## Before Implementing ANY UI Change
+
+Complete this checklist **before writing any code**:
+
+### 1. Impact Analysis
+
+For EVERY change, explicitly answer:
+
+- [ ] **Does this affect mobile?** If yes, what should happen?
+- [ ] **Does this affect tablet?** If yes, what should happen?  
+- [ ] **Does this affect desktop?** If yes, what should happen?
+- [ ] **Does this affect other components?** If yes, which ones?
+
+### 2. Check Existing Patterns
+
+- [ ] Look at how similar sections are implemented in `index.html`
+- [ ] Check the existing CSS patterns in `styles.css`
+- [ ] Understand the color palette and design language (Adava style)
+
+---
+
+## Implementation Requirements
+
+### Viewport-Aware CSS
+
+Always include media queries for responsive behavior:
+
+#### ✅ CORRECT - Clear breakpoints
+```css
+/* Mobile: < 768px */
+@media (max-width: 767px) {
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Tablet: 768px - 1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* Desktop: >= 1024px */
+@media (min-width: 1024px) {
+    .section-title {
+        font-size: 2.5rem;
+    }
+}
+```
+
+### Adava Design System
+
+Always use these color conventions:
+
+```css
+/* Purple/Magenta - Primary colors */
+--purple-primary: #a259ff;
+--purple-dark: #8b5cf6;
+
+/* Teal/Green - CTA buttons */
+--cta-teal: #25877D;
+--cta-teal-hover: #12756B;
+
+/* Dark backgrounds */
+--bg-dark: #0f0f1a;
+--bg-darker: #0a0a14;
+```
+
+---
+
+## Prohibited Patterns
+
+These patterns **ALWAYS** cause bugs:
+
+### ❌ Hard-coded values without responsive considerations
+```css
+.container {
+    width: 1200px;  /* Will overflow on mobile! */
+}
+```
+
+### ❌ Testing only desktop
+```javascript
+test('section visible', async ({ page }) => {
+    // ❌ MISSING mobile test!
+});
+```
+
+### ❌ Using ambiguous breakpoints
+```css
+@media (max-width: 768px) { /* Mobile */ }
+@media (min-width: 768px) { /* Desktop */ }
+/* ❌ What happens AT 768px? Conflict! */
+```
+
+---
+
+## Required Testing
+
+Before marking ANY change as DONE, you MUST:
+
+### 1. Run Unit Tests
+```bash
+npm run test
+```
+- **MUST PASS** before commit
+
+### 2. Run UX Smoke Tests
+```bash
+npm run test:ux:smoke
+```
+- Catches major breakages quickly
+
+### 3. For Significant UI Changes, Run Full UX
+```bash
+npm run test:ux
+```
+- Complete verification
+
+### 4. If ANY test fails
+- The change is **NOT complete**
+- Fix the issue and re-test
+- Do not proceed until all tests pass
+
+---
+
+## Required Patterns
+
+### ✅ Always use CSS variables for colors
+```css
+.button {
+    background: var(--cta-teal);
+    color: white;
+}
+.button:hover {
+    background: var(--cta-teal-hover);
+}
+```
+
+### ✅ Always test on multiple viewports
+```javascript
+test('works on mobile', async ({ page }) => {
+    await page.setViewportSize({ width: 430, height: 932 });
+    // ... test
+});
+
+test('works on desktop', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    // ... test
+});
+```
+
+### ✅ Always use semantic HTML
+```html
+<section id="instructors">
+    <h2>Our Instructors</h2>
+    <!-- Not div with classes only -->
+</section>
+```
+
+---
+
+## Workflow: Making UI Changes
+
+Follow this EXACT sequence:
+
+1. **READ** existing code to understand patterns
+2. **IMPLEMENT** with responsive considerations
+3. **RUN** unit tests: `npm run test`
+4. **RUN** UX smoke tests: `npm run test:ux:smoke`
+5. **VERIFY** visually with screenshot (if available)
+6. **COMMIT** only after all tests pass
+
+---
+
+## Anti-Pattern Detection
+
+Before committing, check for these anti-patterns:
+
+### Missing responsive styles
+```bash
+# If you changed desktop styles, did you update mobile?
+git diff styles.css | grep "@media"
+```
+
+### Hard-coded pixel values
+```bash
+# Check for non-responsive widths
+git diff styles.css | grep -E "width:\s*[0-9]+px"
+```
+
+---
+
+## Remember
+
+**Test on multiple viewports. Use CSS variables. Follow existing patterns.**
+
+If something is unclear:
+1. Check existing code for similar patterns
+2. If pattern doesn't exist, ask before implementing
+3. Always test on mobile AND desktop

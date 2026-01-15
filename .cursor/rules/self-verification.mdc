@@ -1,0 +1,251 @@
+# Self-Verification Protocol for AI Agents
+
+After implementing ANY UI change, follow this verification protocol to ensure correctness.
+
+---
+
+## Automated Verification Workflow
+
+### Step 1: Run Unit Tests
+
+```bash
+npm run test
+```
+
+This runs static analysis tests that check:
+- File existence
+- HTML structure
+- CSS structure
+- Content requirements
+- Accessibility basics
+
+### Step 2: Run UX Tests
+
+```bash
+npm run test:ux:smoke
+```
+
+This runs browser-based tests that verify:
+- Page loads correctly
+- Critical elements visible
+- Forms work
+- Navigation works
+
+### Step 3: Interpret Results
+
+#### ✅ If ALL checks pass:
+```
+VERIFICATION PASSED
+All tests pass.
+```
+
+**Action:** Proceed to commit.
+
+#### ❌ If ANY checks fail:
+```
+VERIFICATION FAILED
+Some tests failed.
+```
+
+**Action:** Review failures and fix before committing.
+
+---
+
+## Manual Verification (When Automated Tests Fail)
+
+If automated tests fail, follow this debugging workflow:
+
+### For Unit Test Failures
+
+1. **Read the error message carefully**
+   - It tells you exactly what's missing
+
+2. **Common fixes:**
+   - Missing element → Add to HTML
+   - Missing CSS property → Add to styles.css
+   - Wrong structure → Fix HTML structure
+
+3. **Re-run tests:**
+   ```bash
+   npm run test
+   ```
+
+### For UX Test Failures
+
+1. **Run in headed mode to see the failure:**
+   ```bash
+   npm run test:ux:headed
+   ```
+
+2. **Common issues:**
+   - Element not visible → Check CSS display/visibility
+   - Interaction fails → Check event handlers
+   - Timing issues → Add appropriate waits
+
+3. **Re-run tests:**
+   ```bash
+   npm run test:ux:smoke
+   ```
+
+---
+
+## Before Claiming "Done"
+
+Before claiming ANY change is done, verify:
+
+- [ ] **Unit Tests:** PASSED
+  ```bash
+  npm run test
+  ```
+
+- [ ] **UX Smoke Tests:** PASSED
+  ```bash
+  npm run test:ux:smoke
+  ```
+
+- [ ] **Visual Check (Optional but recommended):**
+  - Start server: `npm run serve`
+  - Open browser to `http://localhost:8888`
+  - Check mobile (< 768px), tablet (768-1023px), desktop (>= 1024px)
+
+---
+
+## Git Commit Workflow
+
+The verification is enforced by git hooks.
+
+### Pre-Commit Hook
+
+When you commit, the pre-commit hook automatically runs:
+
+```bash
+# Runs automatically on git commit
+npm run test
+```
+
+**If tests fail, commit is BLOCKED.**
+
+You'll see:
+```
+❌ Tests FAILED
+Your change breaks something.
+Run: npm run test
+to see what's wrong
+```
+
+**Action:** Fix the issue before committing.
+
+---
+
+## Common Verification Scenarios
+
+### Scenario 1: Changed index.html
+
+**What gets tested:**
+- HTML structure tests
+- Content tests
+- Accessibility tests
+
+**Expected time:** ~1s for unit tests
+
+---
+
+### Scenario 2: Changed styles.css
+
+**What gets tested:**
+- CSS structure tests
+- Design consistency tests
+- Responsive tests
+
+**Expected time:** ~1s for unit tests
+
+**Common failures:**
+- Missing CSS variables
+- Missing media queries
+- Missing required properties
+
+---
+
+### Scenario 3: Added new section
+
+**What you should do FIRST:**
+
+1. **Add test for the new section:**
+   ```javascript
+   test('New section exists', () => {
+       const html = fs.readFileSync('index.html', 'utf8');
+       assert(html.includes('new-section'), 'Missing new section');
+   });
+   ```
+
+2. **Implement the section**
+
+3. **Run verification:**
+   ```bash
+   npm run test
+   npm run test:ux:smoke
+   ```
+
+---
+
+## Troubleshooting
+
+### "Server not running" error
+
+**Problem:** UX tests need the app running on http://localhost:8888
+
+**Solution:**
+```bash
+# In a separate terminal:
+npm run serve
+
+# Then run tests:
+npm run test:ux
+```
+
+---
+
+### Tests pass locally but fail in pre-commit hook
+
+**Problem:** You have unstaged changes
+
+**Solution:**
+```bash
+# Stage all changes:
+git add .
+
+# Then commit:
+git commit -m "Your message"
+```
+
+---
+
+## Success Criteria
+
+Your change is verified and ready to commit when:
+
+✅ All unit tests pass  
+✅ All UX smoke tests pass  
+✅ You can answer "yes" to:
+  - Does this work on mobile?
+  - Does this work on desktop?
+  - Did I follow existing patterns?
+
+---
+
+## Remember
+
+**You don't need human verification if automation passes.**
+
+The automation checks:
+- ✅ File structure correct
+- ✅ HTML has required elements
+- ✅ CSS has required properties
+- ✅ Page loads and is interactive
+- ✅ Critical paths work
+
+If all automated checks pass, the change is correct by definition.
+
+If automated checks fail, fix the issue and re-run verification.
+
+**Never skip verification. Never bypass git hooks.**
