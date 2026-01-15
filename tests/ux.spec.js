@@ -2,7 +2,7 @@
 const { test, expect } = require('@playwright/test');
 
 /**
- * UX Tests for AdaVa University Landing Page
+ * UX Tests for Adava University Landing Page
  * 
  * Tags:
  * - @smoke: Critical tests for quick validation
@@ -24,7 +24,7 @@ async function waitForPageReady(page) {
 test.describe('Smoke Tests @smoke', () => {
     test('page loads successfully with title @smoke', async ({ page }) => {
         await page.goto('/');
-        await expect(page).toHaveTitle(/AdaVa|University|AI|Coding/i);
+        await expect(page).toHaveTitle(/Adava|University|AI|Coding/i);
     });
 
     test('main hero section is visible @smoke', async ({ page }) => {

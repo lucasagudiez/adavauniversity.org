@@ -1,5 +1,5 @@
 #!/bin/bash
-# Setup git hooks for the AdaVa University project
+# Setup git hooks for the Adava University project
 
 HOOK_DIR="$(git rev-parse --show-toplevel)/.git/hooks"
 

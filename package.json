@@ -1,7 +1,7 @@
 {
   "name": "adavauniversity.org",
   "version": "1.0.0",
-  "description": "AdaVa University AI Coding Course - Learn to code with AI in 10 days",
+  "description": "Adava University AI Coding Course - Learn to code with AI in 10 days",
   "main": "index.html",
   "directories": {
     "test": "tests"
@@ -31,7 +31,7 @@
     "education",
     "course"
   ],
-  "author": "AdaVa University",
+  "author": "Adava University",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {

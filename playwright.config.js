@@ -3,7 +3,7 @@ const { defineConfig, devices } = require('@playwright/test');
 const os = require('os');
 
 /**
- * Playwright Configuration for AdaVa University Landing Page
+ * Playwright Configuration for Adava University Landing Page
  * 
  * Optimizations:
  * - Max parallelism (all CPU cores)

@@ -2,7 +2,7 @@
 const { test, expect } = require('@playwright/test');
 
 /**
- * Viewport Matrix Tests for AdaVa University
+ * Viewport Matrix Tests for Adava University
  * 
  * Tests all critical components across multiple viewports to prevent
  * responsive design bugs.
