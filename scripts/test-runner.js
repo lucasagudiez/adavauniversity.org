@@ -157,15 +157,11 @@ test('adava-icon.svg logo exists', () => {
     assert(fs.existsSync(resolveRoot('images/adava-icon.svg')), 'images/adava-icon.svg is missing');
 });
 
-test('instructor images directory exists with all instructors (if present)', () => {
+test('instructor images directory exists with all instructors', () => {
     const instructorsDir = resolveRoot('images/instructors');
-    // This test is optional - instructor images may not be committed to git
-    if (fs.existsSync(instructorsDir)) {
-        const files = fs.readdirSync(instructorsDir);
-        assert(files.length >= 7, `Only ${files.length} instructor images, need at least 7`);
-    } else {
-        bufferLog('    (instructor images not committed - skipping)');
-    }
+    assert(fs.existsSync(instructorsDir), 'images/instructors directory is missing');
+    const files = fs.readdirSync(instructorsDir);
+    assert(files.length >= 7, `Only ${files.length} instructor images, need at least 7`);
 });
 
 // ============================================================================
