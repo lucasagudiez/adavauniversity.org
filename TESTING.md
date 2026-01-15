@@ -4,31 +4,57 @@
 
 | Test Type | Count | Time | When to Run |
 |-----------|-------|------|-------------|
-| **Unit Tests** | 67+ | **0.2s** ⚡ | Every commit (automatic) |
-| **Smoke Tests** | 6 | **5-7s** 🚀 | Quick validation |
-| **Full UX Tests** | 20+ | **15-20s** 🧪 | Before releases |
+| **Unit Tests** | 70+ | **~1s** ⚡ | Every commit (automatic) |
+| **Smoke Tests** | 6 | **~5s** 🚀 | Quick validation after UI changes |
+| **Full UX Tests** | 40+ | **~20s** 🧪 | Before releases, after major changes |
+| **Mobile Tests** | 10+ | **~10s** 📱 | After responsive changes |
 
 ---
 
-## Test Commands
+## Quick Reference Commands
 
 ```bash
-# Fast unit tests (runs automatically on commit)
-npm test                    # ~0.2 seconds
+# TIER 1: Fast unit tests (runs automatically on commit)
+npm test                    # ~1 second
 
-# Smoke tests (critical path only)
-npm run test:ux:smoke       # ~7 seconds
+# TIER 2: Smoke tests (critical path only)
+npm run test:ux:smoke       # ~5 seconds
 
-# Full UX/E2E tests
-npm run test:ux             # ~15-20 seconds (Chromium only)
-npm run test:ux:all         # ~30 seconds (all browsers)
+# TIER 3: Full browser tests
+npm run test:ux             # ~20 seconds (Chromium only)
+npm run test:ux:mobile      # ~10 seconds (Mobile Chrome only)
+npm run test:responsive     # Desktop + Mobile
 
 # Everything
-npm run test:full           # Unit + Full UX
+npm run test:full           # Unit + Full UX (~25 seconds)
+
+# CI/CD
+npm run test:ci             # Unit + Smoke (fast verification)
+npm run check               # Quick sanity check
 
 # Interactive/Debug
 npm run test:ux:ui          # Playwright UI mode
 npm run test:ux:headed      # Watch tests in browser
+```
+
+---
+
+## Decision Tree: Which Tests to Run
+
+```
+Made a change?
+├── Changed styles.css?
+│   └── Run: npm run test && npm run test:ux:smoke
+├── Changed index.html structure?
+│   └── Run: npm run test && npm run test:ux:smoke
+├── Changed content only?
+│   └── Run: npm test (unit tests enough)
+├── Added new section/feature?
+│   └── Run: npm run test:full (all tests)
+├── Fixed a bug?
+│   └── Run: npm run test:full (ensure no regressions)
+└── About to commit?
+    └── Run: npm run check (quick sanity check)
 ```
 
 ---

@@ -1,0 +1,120 @@
+# Testing Strategy for Agents
+
+## Core Principle: Fast Feedback → Full Validation
+
+When modifying code, follow this workflow:
+
+1. **Make changes**
+2. **Run relevant tests** (fast, ~2-10s)
+3. **If fail**: Fix and re-run relevant tests only
+4. **If pass**: Continue or run full suite before commit
+5. **Before commit**: Always run full suite
+
+---
+
+## Decision Logic: Which Tests to Run
+
+### After Editing `styles.css` (styling)
+```bash
+# Run unit tests for CSS
+npm run test | grep -E "(CSS|Style|Design|Responsive)"
+
+# If making layout changes, run UX tests
+npm run test:ux:smoke
+```
+
+### After Editing `index.html` (structure)
+```bash
+# Quick smoke test
+npm run test:ux:smoke
+
+# Full unit tests
+npm run test
+```
+
+### After Editing Test Files
+```bash
+# Run just that test file
+npx playwright test tests/<edited-file>.spec.js
+```
+
+---
+
+## Quick Reference Commands
+
+| Scenario | Command | Time |
+|----------|---------|------|
+| Quick check | `npm run test` | ~1s |
+| Just edited styles.css | `npm run test:ux:smoke` | ~3s |
+| Just edited a test file | `npx playwright test tests/<file>` | ~2-5s |
+| Before committing | `npm run test:full` | ~15s |
+| Something broke, find it | `npm run test:full` | ~15s |
+
+---
+
+## Test Categories Explained
+
+### Unit Tests (~70 tests, ~1s)
+Static analysis - no browser needed:
+- File existence checks
+- HTML structure validation
+- CSS structure validation
+- Content verification
+- Accessibility checks
+
+**When relevant**: Content changes, structural changes
+
+### UX Smoke Tests (~6 tests, ~3s)
+Critical path only:
+- Page loads
+- Hero visible
+- CTAs work
+- Navigation works
+- Forms functional
+
+**When relevant**: Any UI-affecting change, quick sanity check
+
+### UX Full Tests (~40 tests, ~15s)
+Complete browser automation:
+- All user interactions
+- Visual layout
+- Mobile responsiveness
+- Accessibility
+- UI Effects
+
+**When relevant**: Before commit, after major changes
+
+---
+
+## When to Run Full Suite
+
+ALWAYS run full suite (`npm run test:full`) when:
+- About to commit
+- Unsure what a change affected
+- Refactoring across multiple files
+- Fixing a bug (to ensure no regressions)
+- Tests are failing and you're not sure why
+
+---
+
+## Adding New Tests
+
+When you add a new feature:
+
+1. Add test to `scripts/test-runner.js`:
+```javascript
+test('Description of what feature does', () => {
+    const html = fs.readFileSync('index.html', 'utf8');
+    assert(html.includes('feature-marker'), 'Missing feature');
+});
+```
+
+2. For UI features, add to `tests/ux.spec.js`:
+```javascript
+test('feature works on interaction @smoke', async ({ page }) => {
+    await page.goto('/');
+    // ... test interaction
+});
+```
+
+3. Run tests to verify they pass
