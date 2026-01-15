@@ -1690,6 +1690,54 @@
                 });
             });
         }
+
+        // ============================================
+        // FAQ ACCORDION - Close others when one opens + Smooth animation
+        // ============================================
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const answer = item.querySelector('.faq-answer');
+            
+            // Set initial state
+            if (!item.open) {
+                answer.style.maxHeight = '0px';
+            }
+            
+            item.addEventListener('toggle', function() {
+                if (this.open) {
+                    // Opening - set max-height to actual content height for smooth animation
+                    answer.style.maxHeight = '0px';
+                    // Force reflow
+                    answer.offsetHeight;
+                    // Get actual content height
+                    const contentHeight = answer.scrollHeight;
+                    // Animate to full height
+                    answer.style.maxHeight = contentHeight + 'px';
+                    
+                    // Close all other items smoothly
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== this && otherItem.open) {
+                            const otherAnswer = otherItem.querySelector('.faq-answer');
+                            otherAnswer.style.maxHeight = otherAnswer.scrollHeight + 'px';
+                            // Force reflow
+                            otherAnswer.offsetHeight;
+                            otherAnswer.style.maxHeight = '0px';
+                            // Close after animation
+                            setTimeout(() => {
+                                otherItem.open = false;
+                            }, 500);
+                        }
+                    });
+                } else {
+                    // Closing - animate to 0
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    // Force reflow
+                    answer.offsetHeight;
+                    answer.style.maxHeight = '0px';
+                }
+            });
+        });
     </script>
 </body>
 </html>

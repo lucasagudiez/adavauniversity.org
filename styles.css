@@ -1911,14 +1911,14 @@ blockquote {
     border: 1px solid var(--border-subtle);
     border-radius: 12px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .faq-item:hover {
     border-color: var(--purple-light);
 }
 
-.faq-item.active {
+.faq-item[open] {
     border-color: var(--cta-teal);
     box-shadow: 0 0 20px rgba(37, 135, 125, 0.2);
 }
@@ -1938,6 +1938,15 @@ blockquote {
     text-align: left;
     font-family: inherit;
     transition: all 0.3s ease;
+    outline: none;
+}
+
+summary.faq-question {
+    list-style: none;
+}
+
+summary.faq-question::-webkit-details-marker {
+    display: none;
 }
 
 .faq-question:hover {
@@ -1952,19 +1961,29 @@ blockquote {
     margin-left: 16px;
 }
 
-.faq-item.active .faq-icon {
+.faq-item[open] .faq-icon {
     transform: rotate(45deg);
     color: var(--cta-teal);
 }
 
 .faq-answer {
+    display: block;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.4s ease,
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+    opacity: 0;
+    transform: translateY(-10px);
 }
 
-.faq-item.active .faq-answer {
-    max-height: 300px;
+.faq-item[open] .faq-answer {
+    opacity: 1;
+    transform: translateY(0);
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.4s ease 0.12s,
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.08s;
 }
 
 .faq-answer p {
