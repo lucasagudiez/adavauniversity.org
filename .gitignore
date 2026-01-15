@@ -22,3 +22,6 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Local credentials and sensitive files
+local_files/
