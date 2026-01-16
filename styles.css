@@ -389,7 +389,7 @@ h3 { font-size: 1.25rem; }
     position: relative;
     perspective: 1500px;
     perspective-origin: 50% 40%;
-    overflow: hidden;
+    overflow: visible;
     transform-style: preserve-3d;
 }
 
@@ -730,6 +730,12 @@ h3 { font-size: 1.25rem; }
     padding: 60px 0;
     position: relative;
     z-index: 1;
+    overflow: visible;
+}
+
+.cta-section .container {
+    position: relative;
+    z-index: 10;
 }
 
 .cta-title {
@@ -2005,6 +2011,7 @@ summary.faq-question::-webkit-details-marker {
     text-align: center;
     background: rgba(0, 0, 0, 0.3);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
 }
 
 .adava-title {
@@ -2739,6 +2746,160 @@ summary.faq-question::-webkit-details-marker {
 }
 
 /* ============================================
+   BACK TO TOP ARROW BUTTON
+   ============================================ */
+.back-to-top-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 0;
+}
+
+.back-to-top-btn {
+    position: absolute;
+    left: 24px;
+    bottom: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(37, 135, 125, 0.9);
+    border: 2px solid var(--accent-teal);
+    border-radius: 10px;
+    color: var(--text-white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(37, 135, 125, 0.4), 0 0 20px rgba(37, 135, 125, 0.2);
+}
+
+.back-to-top-btn:hover {
+    background: rgba(37, 135, 125, 1);
+    border-color: var(--accent-teal);
+    color: var(--text-white);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(37, 135, 125, 0.6), 0 0 30px rgba(37, 135, 125, 0.3);
+}
+
+.back-to-top-btn:active {
+    transform: translateY(-1px);
+}
+
+.back-to-top-btn svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+.back-to-top-btn:hover svg {
+    transform: translateY(-2px);
+}
+
+/* Back to Top Button Responsive */
+@media (max-width: 768px) {
+    .back-to-top-btn {
+        left: 16px;
+        bottom: 16px;
+        width: 40px;
+        height: 40px;
+    }
+    
+    .back-to-top-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* ============================================
+   COMPANY NAMES MARQUEE
+   ============================================ */
+.company-marquee-section {
+    background: linear-gradient(180deg, rgba(15, 8, 24, 0.95) 0%, rgba(5, 2, 8, 0.98) 100%);
+    padding: 1.5rem 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(139, 92, 246, 0.15);
+    border-bottom: none;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.company-marquee-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.company-marquee-track {
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.company-marquee-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    animation: companyMarqueeScroll 40s linear infinite;
+    width: fit-content;
+    white-space: nowrap;
+}
+
+@keyframes companyMarqueeScroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.company-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: color 0.3s ease;
+}
+
+.company-name:hover {
+    color: var(--accent-teal);
+}
+
+.company-separator {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+/* Company Marquee Responsive */
+@media (max-width: 768px) {
+    .company-marquee-section {
+        padding: 1rem 0;
+    }
+    
+    .company-marquee-content {
+        gap: 1.5rem;
+        animation-duration: 30s;
+    }
+    
+    .company-name {
+        font-size: 0.9rem;
+    }
+    
+    .company-separator {
+        font-size: 1rem;
+    }
+}
+
+/* ============================================
    COMPANY LOGOS MARQUEE
    ============================================ */
 .logos-marquee {
@@ -2799,9 +2960,72 @@ summary.faq-question::-webkit-details-marker {
    ENHANCED FOOTER
    ============================================ */
 .footer {
-    background: linear-gradient(180deg, rgba(15, 8, 24, 0.95) 0%, #050208 100%);
+    background: linear-gradient(180deg, rgba(5, 2, 8, 0.98) 0%, #050208 100%);
     padding: 5rem 0 2rem;
-    border-top: 1px solid rgba(139, 92, 246, 0.15);
+    border-top: none;
+    margin-top: 0;
+}
+
+/* Scroll to Top Button - Fixed Position */
+.scroll-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(37, 135, 125, 0.9);
+    border: 2px solid rgba(37, 135, 125, 0.5);
+    border-radius: 50%;
+    color: var(--text-white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(37, 135, 125, 0.3);
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background: rgba(37, 135, 125, 1);
+    border-color: var(--accent-teal);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(37, 135, 125, 0.5);
+}
+
+.scroll-to-top:active {
+    transform: translateY(-2px);
+}
+
+.scroll-to-top svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Scroll to Top Button Responsive */
+@media (max-width: 768px) {
+    .scroll-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    .scroll-to-top svg {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 .footer-grid {
@@ -2852,6 +3076,41 @@ summary.faq-question::-webkit-details-marker {
     color: rgba(255, 255, 255, 0.6);
     font-size: 0.95rem;
     line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.social-link:hover {
+    background: rgba(37, 135, 125, 0.2);
+    border-color: var(--accent-teal);
+    color: var(--accent-teal);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 135, 125, 0.3);
+}
+
+.social-link svg {
+    width: 20px;
+    height: 20px;
 }
 
 .footer-links h4 {
@@ -2932,6 +3191,10 @@ summary.faq-question::-webkit-details-marker {
     
     .footer-links h4 {
         margin-top: 1rem;
+    }
+    
+    .footer-social {
+        justify-content: center;
     }
     
     .footer-bottom {
