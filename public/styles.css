@@ -3850,7 +3850,7 @@ canvas.confetti-canvas {
     gap: 30px;
     max-width: 1400px;
     margin: 0 auto;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Keep all three posters side by side */
 }
 
 .project-link {
