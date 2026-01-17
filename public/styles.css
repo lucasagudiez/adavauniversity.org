@@ -3844,11 +3844,13 @@ canvas.confetti-canvas {
 }
 
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
     gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
+    flex-wrap: wrap;
 }
 
 .project-link {
@@ -3859,6 +3861,8 @@ canvas.confetti-canvas {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     background: var(--bg-darker);
+    max-width: 350px;
+    flex: 1 1 300px;
 }
 
 .project-link:hover {
@@ -3923,8 +3927,13 @@ canvas.confetti-canvas {
     }
 
     .projects-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .project-link {
+        max-width: 100%;
+        width: 100%;
     }
 }
 
