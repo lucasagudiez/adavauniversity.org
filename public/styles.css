@@ -3848,21 +3848,19 @@ canvas.confetti-canvas {
     justify-content: center;
     align-items: flex-start;
     gap: 30px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     flex-wrap: wrap;
 }
 
 .project-link {
-    display: block;
+    display: inline-block;
     position: relative;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     background: var(--bg-darker);
-    max-width: 350px;
-    flex: 1 1 300px;
 }
 
 .project-link:hover {
@@ -3871,9 +3869,10 @@ canvas.confetti-canvas {
 }
 
 .project-image {
-    width: 100%;
-    height: auto;
     display: block;
+    max-width: 400px;
+    width: auto;
+    height: auto;
     transition: all 0.3s ease;
 }
 
@@ -3931,9 +3930,8 @@ canvas.confetti-canvas {
         align-items: center;
     }
 
-    .project-link {
+    .project-image {
         max-width: 100%;
-        width: 100%;
     }
 }
 
