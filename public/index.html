@@ -10,8 +10,8 @@
     <!-- AOS - Animate On Scroll Library (CDN) -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
     
-    <!-- Swipebox - Lightbox for images -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.swipebox/1.4.4/css/swipebox.min.css">
+    <!-- GLightbox - Modern Lightbox for images -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/css/glightbox.min.css">
     
     <link rel="stylesheet" href="styles.css">
     
@@ -753,13 +753,13 @@
                 <p class="section-subtitle">Students build real projects that demonstrate their programming skills</p>
             </div>
             <div class="projects-grid">
-                <a href="images/posters/gan.png" class="project-link swipebox" rel="gallery" data-aos="fade-up">
+                <a href="images/posters/gan.png" class="project-link glightbox" data-gallery="posters" data-aos="fade-up">
                     <img src="images/posters/gan.png" alt="Generative AI Project" class="project-image">
                 </a>
-                <a href="images/posters/state-rewards.png" class="project-link swipebox" rel="gallery" data-aos="fade-up" data-aos-delay="100">
+                <a href="images/posters/state-rewards.png" class="project-link glightbox" data-gallery="posters" data-aos="fade-up" data-aos-delay="100">
                     <img src="images/posters/state-rewards.png" alt="Reinforcement Learning Project" class="project-image">
                 </a>
-                <a href="images/posters/decision-trees.png" class="project-link swipebox" rel="gallery" data-aos="fade-up" data-aos-delay="200">
+                <a href="images/posters/decision-trees.png" class="project-link glightbox" data-gallery="posters" data-aos="fade-up" data-aos-delay="200">
                     <img src="images/posters/decision-trees.png" alt="AI Decision Trees Project" class="project-image">
                 </a>
             </div>
@@ -1521,11 +1521,8 @@
     <!-- AOS - Animate On Scroll (CDN) -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     
-    <!-- jQuery (required for Swipebox) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
-    <!-- Swipebox - Lightbox for images -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.swipebox/1.4.4/js/jquery.swipebox.min.js"></script>
+    <!-- GLightbox - Modern Lightbox for images -->
+    <script src="https://cdn.jsdelivr.net/npm/glightbox@3.2.0/dist/js/glightbox.min.js"></script>
     
     <!-- GSAP + ScrollTrigger for Advanced Animations (CDN) -->
     <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -1541,9 +1538,12 @@
             delay: 0
         });
         
-        // Initialize Swipebox for poster gallery
-        $(document).ready(function() {
-            $('.swipebox').swipebox();
+        // Initialize GLightbox for poster gallery
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+            autoplayVideos: false
         });
 
         // Initialize Vanilla Tilt on all cards with data-tilt - subtle effect
