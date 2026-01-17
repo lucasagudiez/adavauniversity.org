@@ -21,9 +21,7 @@ const fileCache = new Map();
 const originalReadFileSync = fs.readFileSync.bind(fs);
 
 fs.readFileSync = function(filePath, options) {
-    // Node 8 compatible: no optional chaining
-    var isUtf8 = options === 'utf8' || (options && options.encoding === 'utf8');
-    if (isUtf8) {
+    if (options === 'utf8' || options?.encoding === 'utf8') {
         const pathStr = filePath.toString();
         if (pathStr.endsWith('.css') || pathStr.endsWith('.js') || 
             pathStr.endsWith('.html') || pathStr.endsWith('.md') ||

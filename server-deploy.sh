@@ -5,7 +5,11 @@
 
 set -e
 
-DEPLOY_DIR="/home/lucas/www/adavauniversity.org/public"  # Adjust to your server path
+# Load NVM to use Node 16+ (supports modern JavaScript)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+DEPLOY_DIR="/home/lucas/www/adavauniversity.org"
 LOG_FILE="/home/lucas/logs/adavauniversity-deploy.log"
 LOCK_FILE="/tmp/adavauniversity-deploy.lock"
 
@@ -39,7 +43,7 @@ LAST_WORKING_COMMIT="$CURRENT_COMMIT"
 git reset --hard origin/deploy
 
 # Run tests
-echo "$(date): Running tests..." >> "$LOG_FILE"
+echo "$(date): Running tests with Node $(node --version)..." >> "$LOG_FILE"
 
 # Run unit tests
 if node scripts/test-runner.js > /tmp/test-output.txt 2>&1; then
