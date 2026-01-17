@@ -3876,6 +3876,11 @@ canvas.confetti-canvas {
     transition: all 0.3s ease;
 }
 
+/* State-Rewards is taller, so needs smaller width for same area */
+.project-link:nth-child(2) .project-image {
+    max-width: 377px;
+}
+
 .project-link:hover .project-image {
     transform: scale(1.05);
     opacity: 0.7;
