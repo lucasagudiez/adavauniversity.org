@@ -3870,7 +3870,7 @@ canvas.confetti-canvas {
 
 .project-image {
     display: block;
-    max-width: 500px;
+    max-width: 418px;
     width: auto;
     height: auto;
     transition: all 0.3s ease;
@@ -3878,7 +3878,7 @@ canvas.confetti-canvas {
 
 /* State-Rewards is taller, so needs smaller width for same area */
 .project-link:nth-child(2) .project-image {
-    max-width: 377px;
+    max-width: 315px;
 }
 
 .project-link:hover .project-image {
