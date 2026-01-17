@@ -1,5 +1,43 @@
 # Adava University Landing Page - Cursor Rules
 
+## 🚀 DEPLOYMENT - CRITICAL SERVER CONFIGURATION
+
+**⚠️ AFTER PROJECT REORGANIZATION (Jan 2026), NGINX MUST SERVE FROM `public/` DIRECTORY**
+
+### Server Configuration (NEVER CHANGE WITHOUT UPDATING NGINX)
+
+```nginx
+# /etc/nginx/sites-enabled/adavauniversity.org
+root /home/lucas/www/adavauniversity.org/public;  # ← MUST BE public/
+index index.html;
+```
+
+### Why `public/`?
+
+- **`public/`**: All files served to users (HTML, CSS, JS, images)
+- **Root directory**: Development files (tests, scripts, server, docs) - NOT served
+
+### If Site Shows 403 Forbidden
+
+**Cause**: Nginx pointing to wrong directory
+
+**Fix**:
+```bash
+ssh adavauniversity.org
+sudo sed -i 's|root /home/lucas/www/adavauniversity.org;|root /home/lucas/www/adavauniversity.org/public;|' /etc/nginx/sites-enabled/adavauniversity.org
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+### Deploy Process
+
+1. **Local**: Run `./deploy.sh` (runs tests, pushes to deploy branch)
+2. **Server**: Auto-deploy script pulls latest code and serves from `public/`
+
+**See full docs**: `docs/DEPLOY-PROCESS.md`
+
+---
+
 ## ✍️ CONTENT RULES - ALWAYS FOLLOW
 
 1. **Email addresses:** ALWAYS use `adavauniversity@gmail.com` for ALL contact emails
